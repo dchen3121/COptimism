@@ -43,6 +43,19 @@ class Board:
             board_str += "\n"
         return board_str
 
+    @staticmethod
+    def is_in_range(x, y):
+        """Returns true if x and y are both in the range [0, 7]. False otherwise"""
+        return 0 <= x <= 7 and 0 <= y <= 7
+
+    def get(self, x, y):
+        """Return the Piece at index row x and column y"""
+        return self.board[y][x]
+
+    def set(self, x, y, piece):
+        """Set the board at index row x and column y to piece"""
+        self.board[y][x] = piece
+
 
 
 b = Board()
