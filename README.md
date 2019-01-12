@@ -1,3 +1,3 @@
-# CripplingOptimism-
+# Crippling Optimism
 
-it is i a chess engine 
+it is a chess engine 
