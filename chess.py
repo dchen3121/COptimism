@@ -28,10 +28,15 @@ class Board:
         self.board[1][1] = Piece(Type.PAWN, Color.WHITE)
 
     def __str__(self):
-        # board_str = ""
-        # for row in self.board:
-        #     board_str += str(row) + "\n"
-        return "".join(str(row) + "\n" for row in self.board)
+        board_str = ""
+        for row in self.board:
+            for piece in row:
+                board_str += str(piece) + " "
+            board_str += "\n"
+
+        return board_str
+
+
 
 b = Board()
 print(b)
