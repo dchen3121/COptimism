@@ -23,6 +23,7 @@ class Color(Enum):
 
 class Board:
     def __init__(self):
+        # board is a 2D list of pieces, 8 by 8
         self.board = [[None for x in range(8)] for y in range(8)]
         self.board[1][1] = Piece(Type.PAWN, Color.WHITE)
 
