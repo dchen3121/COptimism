@@ -6,7 +6,7 @@ class Piece:
         self.color = color
 
     def __str__(self):
-        return "(" + self.color.name[0].lower() + self.type.name[0] + ")"
+        return self.color.name[0].lower() + self.type.name[0]
 
 class Type(Enum):
     PAWN = 1
@@ -23,15 +23,21 @@ class Color(Enum):
 
 class Board:
     def __init__(self):
+
         self.board = [[None for x in range(8)] for y in range(8)]
         self.board[1][1] = Piece(Type.PAWN, Color.WHITE)
 
     def __str__(self):
         board_str = ""
         for row in self.board:
+            board_str += "|"
             for piece in row:
-                board_str += str(piece) + " "
-            board_str += "\n"
+                if piece == None:
+                    board_str += "  "
+                else:
+                    board_str += str(piece) + " "
+            board_str += "|\n"
+
         return board_str
 
 
