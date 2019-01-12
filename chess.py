@@ -6,7 +6,7 @@ class Piece:
         self.color = color
 
     def __str__(self):
-        return "(" + self.type.name + " " + self.color.name + ")"
+        return "(" + self.color.name[0] + self.type.name[0] + ")"
 
 class Type(Enum):
     PAWN = 1
