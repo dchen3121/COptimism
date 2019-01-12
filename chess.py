@@ -6,8 +6,7 @@ class Piece:
         self.color = color
 
     def __str__(self):
-        return str(self.type) + " " + str(self.color)
-
+        return "(" + self.type.name + " " + self.color.name + ")"
 
 class Type(Enum):
     PAWN = 1
@@ -33,7 +32,6 @@ class Board:
             for piece in row:
                 board_str += str(piece) + " "
             board_str += "\n"
-
         return board_str
 
 
