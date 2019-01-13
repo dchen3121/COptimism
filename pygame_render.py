@@ -7,8 +7,8 @@ import pygame
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
-width, height, = 1000, 1000
-pwidth, pheight = 100, 100
+width, height, = 500, 500
+pwidth, pheight = 50, 50
 BACK_COLOR = (255, 255, 255)
 SELECT_COLOR = (110, 110, 200)
 POSSIBLE_COLOR = (110, 110, 200)
@@ -77,7 +77,6 @@ def render():
             piece = game.board.get(x, y)
             if x1 is not None and y1 is not None and x == x1 and y == y1:
                 pygame.draw.rect(screen, SELECT_COLOR, (x * pwidth, (7 - y) * pheight, pwidth, pheight))
-            if
             if piece is not None:
                 screen.blit(piece_to_image[piece], (x*pwidth, (7 - y)*pheight))
     pygame.display.update()

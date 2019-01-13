@@ -231,7 +231,7 @@ def check_king_safety(board_input):
 def check_double_bishop(board_input):
     white_eval = 0
     black_eval = 0
-    less_than_10_pawns = len(board_input.search(wP).append(board_input.search(bP))) <= 10
+    less_than_10_pawns = len(board_input.search(wP)) + len(board_input.search(bP)) <= 10
     if len(board_input.search(wB)) == 2:
         white_eval += 0.2
         if less_than_10_pawns:
@@ -247,7 +247,7 @@ def check_double_bishop(board_input):
 def check_knight_bonus(board_input):
     white_eval = 0
     black_eval = 0
-    if len(board_input.search(wP).append(board_input.search(bP))) >= 14:
+    if len(board_input.search(wP)) + len(board_input.search(bP)) >= 14:
         for white_knight in board_input.search(wN):
             white_eval += 0.1
         for black_knight in board_input.search(bN):
@@ -287,11 +287,10 @@ def check_king_threat(board_input):
 
 def check_checkmated(board_input):
     '''Checks if one side on the board is checkmated'''
-    if len(moves_while_in_check(board_input)) == 0:
-        if is_in_check(board_input) == Color.WHITE:
-            return [-1000000000, 0]
-        if is_in_check(board_input) == Color.BLACK:
-            return [0, -1000000000]
+    if len(moves_while_in_check(board_input, Color.WHITE)) == 0 and is_in_check(board_input) == Color.WHITE:
+        return [-1000000000, 0]
+    if len(moves_while_in_check(board_input, Color.BLACK)) == 0 and is_in_check(board_input) == Color.BLACK:
+        return [0, -1000000000]
     return [0, 0]
 
 
@@ -319,12 +318,10 @@ def eval_board_state(board_input):
                    check_close_to_promotion(board_input)[1] + check_king_safety(board_input)[1] + \
                    check_checkmated(board_input)[1] + check_double_bishop(board_input)[1] + \
                    check_knight_bonus(board_input)[1]
-    return [white_result, black_result]
+    return white_result - black_result
 
 '''
 print(eval_board_state(sample_board_1))
 print(eval_board_state(sample_board_2))
+print(eval_board_state(sample_board_3))
 '''
-print(check_king_threat(sample_board_1))
-print(check_king_threat(sample_board_2))
-print(check_king_threat(sample_board_3))
