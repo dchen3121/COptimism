@@ -23,6 +23,7 @@ class Type(Enum):
     QUEEN = 5
     KING = 6
 
+
 class Color(Enum):
     WHITE = 0
     BLACK = 1
