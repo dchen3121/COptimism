@@ -76,10 +76,11 @@ def controls_centre(piece_input, board_input, x, y):
         if piece_input.type == Type.KNIGHT:
             if (x, y) in [(1, 3), (1, 4), (2, 1), (3, 1), (4, 1), (5, 1), (6, 2), (6, 3)]:
                 white_val += 0.2
+            if (x, y) in [(2, 2), (5, 2)]:
+                white_val += 0.4
 
+   # elif piece_input.color == Color.BLACK:
 
-    elif piece_input.color == Color.BLACK:
-        return 0
 
 
 def check_centre_points(board_input):
@@ -88,7 +89,6 @@ def check_centre_points(board_input):
     for x in range(0, 8):
         for y in range(0, 8):
             return 0
-
 
 
 
