@@ -1,3 +1,3 @@
 # Crippling Optimism
 
-A pretty good chess engine 
+it is a chess engine 
