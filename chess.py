@@ -1,4 +1,5 @@
 from enum import Enum
+from check_valid_moves import *
 
 
 class Piece:
@@ -70,19 +71,19 @@ class Board:
 
     def __str__(self):
         """Returns a pretty string representation of the 8x8 internal board."""
-        board_str = " "
+        board_str = "  "
         for x in range(8):
             board_str += "-" + str(x) + "-"
         board_str += "\n"
         for row_index, row in enumerate(self.board):
-            board_str += str(row_index)
+            board_str += str(row_index) + "| "
             for piece in row:
                 if piece is None:
                     board_str += "   "
                 else:
                     board_str += str(piece) + " "
             board_str += "|\n"
-        return board_str + " " + "---" * 8 + "\n"
+        return board_str + "  " + "---" * 8 + "\n"
 
     @staticmethod
     def is_in_range(x, y):
@@ -96,6 +97,13 @@ class Board:
     def set(self, x, y, piece):
         """Set the board at index row x and column y to piece"""
         self.board[y][x] = piece
+
+    def move_piece(self, x1, y1, x2, y2):
+        if (x2, y2) in check_valid_moves.valid_moves(x1, y1, self):
+            old_piece = self.get(x1, y1)  # old piece to be moved
+            self.set(x2, y2, old_piece)
+            self.set(x1, y1, None)  # the old position should now be an empty piece
+
 
 
 
