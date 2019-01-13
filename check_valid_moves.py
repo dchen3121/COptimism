@@ -54,17 +54,8 @@ def moves_while_in_check(board, color):
                     if not is_in_check(c, Color.WHITE):
                         moves += [movE]
 
-
-def moves_while_in_check(board):
-    moves = []
-    for x in range(0, 8):
-        for y in range(0, 8):
-            if board.get(x, y) is not None:
-                for move in valid_moves(x, y, board):
-                    b = board.copy
-                    if not is_in_check(b.move(x, y, move[0], move[1])):
-                        moves.append(move)
     return moves
+
 
 def boards_while_in_check(board):
     boards = []
