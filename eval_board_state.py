@@ -217,6 +217,13 @@ def check_king_safety(board_input):
     return [white_eval, black_eval]
 
 
+def check_checkmated(board_input):
+    '''Checks if one side on the board is checkmated'''
+    if len(moves_while_in_check(board_input)):
+
+
+
+
 '''
 print(check_material_value(sample_board_1))
 print(check_piece_activity(sample_board_1))

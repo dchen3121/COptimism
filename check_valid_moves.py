@@ -263,7 +263,7 @@ def valid_move_knight(x, y, board, color):
     while index <= len(counters_list) - 1:
         if in_bound(x + counters_list[index][0], y + counters_list[index][1]) and \
                 (board.get(x + counters_list[index][0], y + counters_list[index][1]) is None or \
-                board.get(x + counters_list[index][0], y + counters_list[index][1]) != color):
+                board.get(x + counters_list[index][0], y + counters_list[index][1]).color != color):
             moves_knight += [(x + counters_list[index][0], y + counters_list[index][1])]
         index += 1
 
