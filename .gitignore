@@ -1,0 +1,7 @@
+## Git will ignore all files with the .xml or .class files ##
+
+*.xml
+
+## Feel free to add a specific file if you need to, ex: ##
+
+CripplingOptimism-.iml
