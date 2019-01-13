@@ -38,11 +38,8 @@ def moves_while_in_check(board):
                     b = board.copy
                     if not is_in_check(b.move(x, y, move[0], move[1])):
                         moves += [move]
-    if len(moves) == 0:
-        return False
 
-    else:
-        return moves
+    return moves
 
 
 
@@ -148,7 +145,7 @@ def valid_move_pawn(x, y, board, color):
         if inBounds(x, y - 1) and board.get(x, y - 1) is None:
             posMoves += [(x, y - 1)]
 
-        if y == 7 and board.get(x, y - 2) is None:
+        if y == 6 and board.get(x, y - 2) is None:
             posMoves += [(x, y - 2)]
 
     return posMoves
@@ -260,7 +257,7 @@ def valid_move_rook(x, y, board, color):
 
 def valid_move_knight(x, y, board, color):
     moves_knight = []
-    counters_list = [[3, 2], [3, -2], [-3, 2], [-3, -2], [2, 3], [-2, 3], [2, -3], [-2, -3]]
+    counters_list = [[2, 1], [2, -1], [-2, 1], [-2, -1], [1, 2], [-1, 2], [1, -2], [-1, -2]]
     index = 0
 
     while index <= len(counters_list) - 1:
