@@ -1,5 +1,4 @@
 from enum import Enum
-import check_valid_moves
 
 
 class Piece:
@@ -9,11 +8,21 @@ class Piece:
         self.color = color
 
     def __str__(self):
-        # returns the piece in string form, e.g. (wB) for white bishop
+        """Returns the string representation of a piece, e.g. (wB) for white bishop"""
         if self.type == Type.KNIGHT:
             return self.color.name[0].lower() + "N"
         else:
             return self.color.name[0].lower() + self.type.name[0]
+
+    def __eq__(self, other):
+        """Returns true if self and other are have equivalent type and color, or if they are both None.
+        False otherwise"""
+        if self is None and other is None:
+            return True
+        if self is not None and other is not None:
+            return self.type == other.type and self.color == other.color
+        else:
+            return False
 
 
 class Type(Enum):
@@ -69,14 +78,19 @@ class Board:
              [wR, wN, wB, wQ, wK, wB, wN, wR]]
         )
 
+    def copy(self):
+        """Return a new copy of the Board"""
+        return Board(self.board)
+
     def __str__(self):
-        """Returns a pretty string representation of the 8x8 internal board."""
+        """Return a pretty string representation of the 8x8 internal board.
+        The (0,0) piece is printed at the bottom left corner."""
         board_str = "  "
         for x in range(8):
             board_str += "-" + str(x) + "-"
         board_str += "\n"
-        for row_index, row in enumerate(self.board):
-            board_str += str(row_index) + "| "
+        for row_index, row in enumerate(reversed(self.board)):
+            board_str += str(7 - row_index) + "| "
             for piece in row:
                 if piece is None:
                     board_str += "   "
@@ -87,7 +101,7 @@ class Board:
 
     @staticmethod
     def is_in_range(x, y):
-        """Returns true if x and y are both in the range [0, 7]. False otherwise"""
+        """Return true if x and y are both in the range [0, 7]. False otherwise"""
         return 0 <= x <= 7 and 0 <= y <= 7
 
     def get(self, x, y):
@@ -99,10 +113,32 @@ class Board:
         self.board[y][x] = piece
 
     def move_piece(self, x1, y1, x2, y2):
-        if (x2, y2) in check_valid_moves.valid_moves(x1, y1, self):
-            old_piece = self.get(x1, y1)  # old piece to be moved
+        """Move the piece at index (x1, y1) to the position at index (x2, y2),
+        only if the (x1, y2) is not an empty piece (None). Otherwise, do nothing.
+        NOTE: this modifies the board in-place."""
+        old_piece = self.get(x1, y1)  # old piece to be moved
+        if old_piece is not None:
             self.set(x2, y2, old_piece)
             self.set(x1, y1, None)  # the old position should now be an empty piece
+
+    def search(self, piece):
+        """Search the internal board and return a list of all the coordinate tuples (x, y)
+        where the piece exists"""
+        # TO DO: use a dict to map pieces to their locations: to speed up search
+        found = []
+        for row in range(8):
+            for col in range(8):
+                if self.get(col, row) == piece:
+                    found.append((col, row))
+        return found
+
+
+board = Board.initial_board()
+print(board)
+print(board.search(Piece(Type.KING, Color.WHITE)))
+
+
+
 
 
 
