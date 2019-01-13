@@ -2,8 +2,8 @@ from chess import*
 
 def is_in_check(board):
 
-    whiteKing = board.search(Type.KING, Color.WHITE)
-    blackKing = board.search(Type.KING, Color.BLACK)
+    whiteKing = board.search(Piece(Type.KING, Color.WHITE))
+    blackKing = board.search(Piece(Type.KING, Color.BLACK))
 
     blackPieceMoves = []
     whitePieceMoves = []
@@ -53,7 +53,6 @@ def boards_while_in_check(board):
                         boards.append(b)
 
     return boards
-
 
 
 ####################################################################
