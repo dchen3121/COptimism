@@ -220,7 +220,12 @@ def check_king_safety(board_input):
 def check_checkmated(board_input):
     '''Checks if one side on the board is checkmated'''
     if len(moves_while_in_check(board_input)) == 0:
-        if
+        if is_in_check(board_input) == Color.WHITE:
+            return [-1000000000, 0]
+        if is_in_check(board_input) == Color.BLACK:
+            return [0, -1000000000]
+    return [0, 0]
+
 
 
 
@@ -239,9 +244,11 @@ print(check_king_safety(sample_board_2))
 
 def eval_board_state(board_input):
     white_result = check_material_value(board_input)[0] + check_piece_activity(board_input)[0] + \
-                   check_close_to_promotion(board_input)[0] + check_king_safety(board_input)[0]
+                   check_close_to_promotion(board_input)[0] + check_king_safety(board_input)[0] + \
+                   check_checkmated(board_input)[0]
     black_result = check_material_value(board_input)[1] + check_piece_activity(board_input)[1] + \
-                   check_close_to_promotion(board_input)[1] + check_king_safety(board_input)[1]
+                   check_close_to_promotion(board_input)[1] + check_king_safety(board_input)[1] + \
+                   check_checkmated(board_input)[1]
     return [white_result, black_result]
 
 '''
