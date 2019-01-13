@@ -56,7 +56,7 @@ print(is_in_check(b, Color.WHITE))
 print(len(moves_while_in_check(b, Color.WHITE)))
 
 
-
+'''
 while True:
     current_player_color = game.current_player_color()
     print("current player: " + current_player_color.name)
@@ -77,5 +77,5 @@ while True:
             break
 
     print("\n\n")
-
+'''
 

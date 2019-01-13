@@ -324,7 +324,8 @@ def eval_board_state(board_input):
 '''
 print(eval_board_state(sample_board_1))
 print(eval_board_state(sample_board_2))
-'''
+
 print(check_king_threat(sample_board_1))
 print(check_king_threat(sample_board_2))
 print(check_king_threat(sample_board_3))
+'''
