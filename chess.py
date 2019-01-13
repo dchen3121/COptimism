@@ -33,6 +33,7 @@ class Type(Enum):
     QUEEN = 5
     KING = 6
 
+
 class Color(Enum):
     WHITE = 0
     BLACK = 1
@@ -74,14 +75,14 @@ class Board:
         bK = Piece(Type.KING, Color.BLACK)
 
         return Board(
-            [[bR, bN, bB, bQ, bK, bB, bN, bR],
-             [bP, bP, bP, bP, bP, bP, bP, bP],
-             [None, None, None, None, None, None, None, None],
-             [None, None, None, None, None, None, None, None],
-             [None, None, None, None, None, None, None, None],
-             [None, None, None, None, None, None, None, None],
+            [[wR, wN, wB, wQ, wK, wB, wN, wR],
              [wP, wP, wP, wP, wP, wP, wP, wP],
-             [wR, wN, wB, wQ, wK, wB, wN, wR]]
+             [None, None, None, None, None, None, None, None],
+             [None, None, None, None, None, None, None, None],
+             [None, None, None, None, None, None, None, None],
+             [None, None, None, None, None, None, None, None],
+             [bP, bP, bP, bP, bP, bP, bP, bP],
+             [bR, bN, bB, bQ, bK, bB, bN, bR]]
         )
 
     def copy(self):
@@ -95,7 +96,7 @@ class Board:
         for x in range(8):
             board_str += "-" + str(x) + "-"
         board_str += "\n"
-        for row_index, row in enumerate(self.board):
+        for row_index, row in enumerate(reversed(self.board)):
             board_str += str(7 - row_index) + "| "
             for piece in row:
                 if piece is None:
