@@ -1,4 +1,5 @@
 from chess import *
+from check_valid_moves import *
 
 wP = Piece(Type.PAWN, Color.WHITE)
 wN = Piece(Type.KNIGHT, Color.WHITE)
@@ -22,7 +23,7 @@ sample_board_1 = Board(
      [None, None, None, None, None, None, None, None],
      [None, None, None, None, None, None, None, None],
      [bP, bP, bP, bP, bP, bP, bP, bP],
-     [bR, bN, bB, bQ, bK, bB, bN, bR],]
+     [bR, bN, bB, bQ, bK, bB, bN, bR]]
 )
 sample_board_2 = Board(
     [[wR, None, wB, None, wK, wB, wN, wR],
@@ -184,14 +185,59 @@ def check_close_to_promotion(board_input):
     return [white_val, black_val]
 
 
+def check_king_safety(board_input):
+    '''checks and evaluates king safety given a board, returns a list of two nums'''
+    white_eval = 0
+    black_eval = 0
+    wK_pos = board_input.search(Piece(Type.KING, Color.WHITE))[0]
+    bK_pos = board_input.search(Piece(Type.KING, Color.BLACK))[0]
+    for white_material, black_material in check_material_value(board_input):
+        if white_material >= 18 and black_material >= 18:
+            if wK_pos[0] in [3, 4]:
+                white_eval -= 0.1
+            if bK_pos[0] in [3, 4]:
+                black_eval -= 0.1
+            if wK_pos[1] == 2:
+                white_eval -= 0.5
+            if bK_pos[1] == 2:
+                black_eval -= 0.5
+            if wK_pos[1] > 2:
+                white_eval -= 1.5
+            if bK_pos[1] > 2:
+                black_eval -= 1.5
+        elif white_material < 18 and black_material < 18:
+            if wK_pos[0] in [0, 7] or wK_pos[1] in [0, 7]:
+                white_eval -= 0.2
+            if bK_pos[0] in [0, 7] or bK_pos[1] in [0, 7]:
+                black_eval -= 0.2
+        else:
+            if white_material > black_material:
+                if wK_pos[1] >= 2:
+                    white_eval -= 0.1
+            elif black_material > white_material:
+                if bK_pos[1] <= 5:
+                    black_eval -= 0.1
+    return [white_eval, black_eval]
 
-
-
+'''
 print(check_material_value(sample_board_1))
 print(check_piece_activity(sample_board_1))
 print(check_close_to_promotion(sample_board_1))
+print(check_king_safety(sample_board_1))
 
 print(check_material_value(sample_board_2))
 print(check_piece_activity(sample_board_2))
 print(check_close_to_promotion(sample_board_2))
+print(check_king_safety(sample_board_2))
+'''
 
+def eval_board_state(board_input):
+    white_result = check_material_value(board_input)[0] + check_piece_activity(board_input)[0] + \
+                   check_close_to_promotion(board_input)[0] + check_king_safety(board_input)[0]
+    black_result = check_material_value(board_input)[1] + check_piece_activity(board_input)[1] + \
+                   check_close_to_promotion(board_input)[1] + check_king_safety(board_input)[1]
+    return [white_result, black_result]
+
+
+print(eval_board_state(sample_board_1))
+print(eval_board_state(sample_board_2))
