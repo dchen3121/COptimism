@@ -1,6 +1,6 @@
 from chess import *
 import check_valid_moves
-from eval_board_state  import*
+from eval_board_state import *
 
 
 sample_board = Board(
