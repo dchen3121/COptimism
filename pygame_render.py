@@ -77,6 +77,7 @@ def render():
             piece = game.board.get(x, y)
             if x1 is not None and y1 is not None and x == x1 and y == y1:
                 pygame.draw.rect(screen, SELECT_COLOR, (x * pwidth, (7 - y) * pheight, pwidth, pheight))
+
             if piece is not None:
                 screen.blit(piece_to_image[piece], (x*pwidth, (7 - y)*pheight))
     pygame.display.update()

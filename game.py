@@ -1,9 +1,23 @@
 from chess import *
 import check_valid_moves
-from eval_board_state import *
+from eval_board_state  import*
 
 
+sample_board = Board(
+    [[wR  , wN  , wB  , None, wK  , None, wN  , wR  ],
+     [wP  , wP  , wP  , wP  , None, wP  , wP  , wP  ],
+     [None, None, None, None, None, None, None, None],
+     [None, None, wB  , None, wP  , None, None, None],
+     [None, None, None, None, bP  , None, None, None ],
+     [None, None, None, bP  , None, None, None, None],
+     [bP  , bP  , bP  , None, None, wR  , bP  , bP  ],
+     [bR  , bN  , bB  , bQ  , bK  , bB  , bN  , bR  ]]
+)
 
+# print(is_in_check(sample_board, Color.BLACK))
+# print(moves_while_in_check(sample_board, Color.BLACK))
+# # print(len(moves_while_in_check(sample_board, Color.BLACK)))
+# print(check_valid_moves.valid_moves(5, 6, sample_board))
 class Game:
     whiteCastleLeft = True
     whiteCastleRight = True
@@ -21,7 +35,16 @@ class Game:
             return Color.BLACK
 
     def make_move(self, x1, y1, x2, y2):
-        if (x2, y2) in check_valid_moves.valid_moves(x1, y1, self.board) and \
+        if is_in_check(self.board, self.current_player_color()) ==  True:
+            if (x2, y2) in check_valid_moves.valid_moves(x1, y1, self.board) and \
+                    (x2, y2) in moves_while_in_check(self.board, self.current_player_color()) and \
+                    self.board.get(x1, y1).color == self.current_player_color():
+                self.board.move_piece(x1, y1, x2, y2)
+                self.turn_number += 1
+            else:
+                print("invalid move, try again")
+
+        elif (x2, y2) in check_valid_moves.valid_moves(x1, y1, self.board) and \
                 self.board.get(x1, y1).color == self.current_player_color():
             self.board.move_piece(x1, y1, x2, y2)
             self.turn_number += 1
@@ -51,32 +74,32 @@ b = Board([[wR, wN, wB, wQ, wK, wB, wN, wR],
            [bR, bN, bB, None, bK, bB, bN, bR]]
 )
 
-print(is_in_check(b, Color.WHITE))
+# print(is_in_check(b, Color.WHITE))
+#
+#
+# print(len(moves_while_in_check(b, Color.WHITE)))
 
 
-print(len(moves_while_in_check(b, Color.WHITE)))
 
+# while True:
+#     current_player_color = game.current_player_color()
+#     print("current player: " + current_player_color.name)
+#     print(game.board)
+#     x1, y1 = map(int, input("enter your move start : x1, y1").split())
+#     x2, y2 = map(int, input("enter your move end   : x2, y2").split())
+#     game.make_move(x1, y1, x2, y2)
+#
+#
+#     if check_valid_moves.is_in_check(game.board, Color.WHITE) != False:
+#         if len(check_valid_moves.moves_while_in_check(game.board, Color.WHITE)) == 0:
+#             print("BLACK WON")
+#             break
+#
+#     if check_valid_moves.is_in_check(game.board, Color.BLACK) != False:
+#         if len(check_valid_moves.moves_while_in_check(game.board, Color.BLACK)) == 0:
+#             print("WHITE WON")
+#             break
+#
+#     print("\n\n")
 
-'''
-while True:
-    current_player_color = game.current_player_color()
-    print("current player: " + current_player_color.name)
-    print(game.board)
-    x1, y1 = map(int, input("enter your move start : x1, y1").split())
-    x2, y2 = map(int, input("enter your move end   : x2, y2").split())
-    game.make_move(x1, y1, x2, y2)
-
-
-    if check_valid_moves.is_in_check(game.board, Color.WHITE) != False:
-        if len(check_valid_moves.moves_while_in_check(game.board, Color.WHITE)) == 0:
-            print("WHITE WON")
-            break
-
-    if check_valid_moves.is_in_check(game.board, Color.BLACK) != False:
-        if len(check_valid_moves.moves_while_in_check(game.board, Color.BLACK)) == 0:
-            print("BLACK WON")
-            break
-
-    print("\n\n")
-'''
 
