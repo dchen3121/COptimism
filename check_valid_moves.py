@@ -67,7 +67,6 @@ def boards_while_in_check(board):
 
 
 
-####################################################################
 def valid_moves(x, y, board):
 
     piece = board.get(x, y)

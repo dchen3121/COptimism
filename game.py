@@ -59,12 +59,12 @@ while True:
 
     if check_valid_moves.is_in_check(game.board, Color.WHITE) != False:
         if len(check_valid_moves.moves_while_in_check(game.board, Color.WHITE)) == 0:
-            print("WHITE WON")
+            print("BLACK WON")
             break
 
     if check_valid_moves.is_in_check(game.board, Color.BLACK) != False:
         if len(check_valid_moves.moves_while_in_check(game.board, Color.BLACK)) == 0:
-            print("BLACK WON")
+            print("WHITE WON")
             break
 
     print("\n\n")
