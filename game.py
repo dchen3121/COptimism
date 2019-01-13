@@ -93,23 +93,7 @@ b = Board([[wR, wN, wB, wQ, wK, wB, wN, wR],
 
 
 # while True:
-#     current_player_color = game.current_player_color()
-#     print("current player: " + current_player_color.name)
-#     print(game.board)
-#     x1, y1 = map(int, input("enter your move start : x1, y1").split())
-#     x2, y2 = map(int, input("enter your move end   : x2, y2").split())
-#     game.make_move(x1, y1, x2, y2)
-#
-#
-#     if check_valid_moves.is_in_check(game.board, Color.WHITE) != False:
-#         if len(check_valid_moves.moves_while_in_check(game.board, Color.WHITE)) == 0:
-#             print("BLACK WON")
-#             break
-#
-#     if check_valid_moves.is_in_check(game.board, Color.BLACK) != False:
-#         if len(check_valid_moves.moves_while_in_check(game.board, Color.BLACK)) == 0:
-#             print("WHITE WON")
-#             break
+
 #
 #     print("\n\n")
 

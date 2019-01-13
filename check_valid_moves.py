@@ -1,5 +1,14 @@
 from chess import*
 
+
+def ultimate_check(x, y, board, Col):
+    if is_in_check(board, Col):
+        return moves_while_in_check(board, Col)
+
+    else:
+        return valid_moves(x, y, board)
+
+
 def is_in_check(board, Col):
 
     king = board.search(Piece(Type.KING, Col))
