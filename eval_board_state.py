@@ -163,8 +163,8 @@ def check_centre_points(board_input):
 
 
 
-print(check_material_value(sample_board_1))
-print(check_centre_points(sample_board_1))
-
-print(check_material_value(sample_board_2))
-print(check_centre_points(sample_board_2))
+# print(check_material_value(sample_board_1))
+# print(check_centre_points(sample_board_1))
+#
+# print(check_material_value(sample_board_2))
+# print(check_centre_points(sample_board_2))
