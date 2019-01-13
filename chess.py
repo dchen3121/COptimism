@@ -70,10 +70,4 @@ class Board:
         self.board[y][x] = piece
 
 
-# b = Board()
-# b.set(1, 1, Piece(Type.KNIGHT, Color.WHITE))
-# b.set(3, 0, Piece(Type.BISHOP, Color.BLACK))
-# print(b)
-
-
 
