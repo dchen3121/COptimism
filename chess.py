@@ -89,7 +89,7 @@ class Board:
         for x in range(8):
             board_str += "-" + str(x) + "-"
         board_str += "\n"
-        for row_index, row in enumerate(reversed(self.board)):
+        for row_index, row in enumerate(self.board):
             board_str += str(7 - row_index) + "| "
             for piece in row:
                 if piece is None:
@@ -132,11 +132,11 @@ class Board:
                     found.append((col, row))
         return found
 
-'''
-board = Board.initial_board()
-print(board)
-print(board.search(Piece(Type.KING, Color.WHITE)))
-'''
+
+# board = Board.initial_board()
+# print(board)
+# print(board.search(Piece(Type.KING, Color.WHITE)))
+
 
 
 
