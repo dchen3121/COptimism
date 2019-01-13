@@ -243,13 +243,14 @@ print(check_king_safety(sample_board_2))
 '''
 
 def eval_board_state(board_input):
+    """Returns the score for white with the score for black subtracted from it."""
     white_result = check_material_value(board_input)[0] + check_piece_activity(board_input)[0] + \
                    check_close_to_promotion(board_input)[0] + check_king_safety(board_input)[0] + \
                    check_checkmated(board_input)[0]
     black_result = check_material_value(board_input)[1] + check_piece_activity(board_input)[1] + \
                    check_close_to_promotion(board_input)[1] + check_king_safety(board_input)[1] + \
                    check_checkmated(board_input)[1]
-    return [white_result, black_result]
+    return white_result - black_result
 
 '''
 print(eval_board_state(sample_board_1))
