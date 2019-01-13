@@ -35,6 +35,16 @@ sample_board_2 = Board(
      [bP, bP, bP, None, bP, bP, bP, bP],
      [bR, bN, bB, bQ, bK, bB, bN, bR]]
 )
+sample_board_3 = Board(
+    [[wR  , None, wB  , None, wK  , wB  , wN  , wR  ],
+     [wP  , wP  , wP  , None, wP  , wP  , wP  , wP  ],
+     [None, None, None, None, None, None, None, None],
+     [None, bB  , None, wP  , None, None, None, None],
+     [None, None, None, bP  , None, None, None, None],
+     [None, None, wN  , None, None, None, None, None],
+     [bP  , bP  , bP  , None, None, bP  , bP  , bP  ],
+     [bR  , bN  , bB  , bQ  , bK  , None, bN  , bR  ]]
+)
 
 
 # check_material_value(board_input) returns a list of length 2 in form [int, int]
