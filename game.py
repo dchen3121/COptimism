@@ -46,8 +46,14 @@ class Game:
 
         elif (x2, y2) in check_valid_moves.valid_moves(x1, y1, self.board) and \
                 self.board.get(x1, y1).color == self.current_player_color():
-            self.board.move_piece(x1, y1, x2, y2)
-            self.turn_number += 1
+            b = self.board.copy()
+            b.move_piece(x1, y1, x2, y2)
+            if is_in_check(b, self.current_player_color()) == True:
+                print("invalid move, try again")
+            else:
+                self.board.move_piece(x1, y1, x2, y2)
+                self.turn_number += 1
+
         else:
             print("invalid move, try again")
 
