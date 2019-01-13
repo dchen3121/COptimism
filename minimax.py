@@ -2,6 +2,15 @@ import eval_board_state
 from chess import *
 import check_valid_moves
 
+def get_best_move(board, depth, color):
+    all_boards = all_valid_boards(board, color)
+    best_board = max(all_valid_boards(board, color), key=lambda board: minimax(board, depth, color, True))
+    for x in range(8):
+        for y in range(8):
+            if board.get(x, y) is not None and best_board.get(x, y) is None:
+                return (x, y)
+
+
 def minimax(board, depth, color, is_max_player):
     """Minimax algorithm. Uses white as the reference color"""
     if depth == 0 or is_game_over(board, color):
