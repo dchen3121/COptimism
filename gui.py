@@ -1,6 +1,7 @@
 # does this work
 import tkinter
 from PIL import ImageTk, Image
+from chess import *
 
 chessboard = tkinter.Tk()
 # Chessboard
@@ -63,62 +64,60 @@ bpawnImg2 = ImageTk.PhotoImage(bpawnImg)
 
 
 def get_chesspiece(x, y):
-    pos = board.get(x, y)
-    if pos.color == Color.WHITE:
+    newBoard = Board.initial_board()
+    pos = newBoard.get(x, y)
+    if pos is None:
+        return 0
+    elif pos.color == Color.WHITE:
         if pos.type == Type.KING:
-            chesspiece = wkingImg2
+            return wkingImg2
         elif pos.type == Type.QUEEN:
-            chesspiece = wqueenImg2
+            return wqueenImg2
         elif pos.type == Type.BISHOP:
-            chesspiece = wbishopImg2
+            return wbishopImg2
         elif pos.type == Type.ROOK:
-            chesspiece = wrookImg2
+            return wrookImg2
         elif pos.type == Type.KNIGHT:
-            chesspiece = wknightImg2
+            return wknightImg2
         else:
-            chesspiece = wpawnImg2
-    else:
+            return wpawnImg2
+    elif pos.color == Color.BLACK:
         if pos.type == Type.KING:
-            chesspiece = bkingImg2
+            return bkingImg2
         elif pos.type == Type.QUEEN:
-            chesspiece = bqueenImg2
+            return bqueenImg2
         elif pos.type == Type.BISHOP:
-            chesspiece = bbishopImg2
+            return bbishopImg2
         elif pos.type == Type.ROOK:
-            chesspiece = brookImg2
+            return brookImg2
         elif pos.type == Type.KNIGHT:
-            chesspiece = bknightImg2
+            return bknightImg2
         else:
-            chesspiece = bpawnImg2
+            return bpawnImg2
 
 
 for j in range(0, 8):
     for i in range(0, 8):
-        if (i % 2 == 0) and (j % 2 != 0):
-            blank = tkinter.Button(chessboard, bg="gray50", image=get_chesspiece(i, j))
-            blank.place(relx=.13 + (i * .105), rely=.135 + (j * .102), anchor="c")
-        elif (i % 2 != 0) and (j % 2 == 0):
-            blank = tkinter.Button(chessboard, bg="gray50", height=3, width=6)
-            blank.place(relx=.13 + (i * .105), rely=.135 + (j * .102), anchor="c")
+        if get_chesspiece(i, j)==0:
+            if (i % 2 == 0) and (j % 2 != 0):
+                blank = tkinter.Button(chessboard, bg="gray50", height=3, width=6)
+                blank.place(relx=.13 + (i * .105), rely=.135 + (j * .102), anchor="c")
+            elif (i % 2 != 0) and (j % 2 == 0):
+                blank = tkinter.Button(chessboard, bg="gray50", height=3, width=6)
+                blank.place(relx=.13 + (i * .105), rely=.135 + (j * .102), anchor="c")
+            else:
+                blank = tkinter.Button(chessboard, bg="white", height=3, width=6)
+                blank.place(relx=.13 + (i * .105), rely=.135 + (j * .102), anchor="c")
         else:
-            blank = tkinter.Button(chessboard, bg="white", height=3, width=6)
-            blank.place(relx=.13 + (i * .105), rely=.135 + (j * .102), anchor="c")
+            if (i % 2 == 0) and (j % 2 != 0):
+                blank = tkinter.Button(chessboard, bg="gray50", image=get_chesspiece(i, j))
+                blank.place(relx=.13 + (i * .105), rely=.135 + (j * .102), anchor="c")
+            elif (i % 2 != 0) and (j % 2 == 0):
+                blank = tkinter.Button(chessboard, bg="gray50", image=get_chesspiece(i, j))
+                blank.place(relx=.13 + (i * .105), rely=.135 + (j * .102), anchor="c")
+            else:
+                blank = tkinter.Button(chessboard, bg="white", image=get_chesspiece(i, j))
+                blank.place(relx=.13 + (i * .105), rely=.135 + (j * .102), anchor="c")
 
-
-'''wKing = tkinter.Button(chessboard, image = wkingImg2)
-wQueen = tkinter.Button(chessboard, image = wqueenImg2)
-wBishop = tkinter.Button(chessboard, image = wbishopImg2)
-wRook = tkinter.Button(chessboard, image = wrookImg2)
-wKnight = tkinter.Button(chessboard, image = wknightImg2)
-
-wKing.place(relx=.13+(i*.105), rely=.24, anchor="c")
-wQueen.place(relx=.13+(i*.105), rely=.24, anchor="c")
-wBishop.place(relx=.13+(i*.105), rely=.24, anchor="c")
-wRook.place(relx=.13+(i*.105), rely=.24, anchor="c")
-wKnight.place(relx=.13+(i*.105), rely=.24, anchor="c")
-
-for i in range (0, 8):
-    wPawn = tkinter.Button(chessboard, image = wpawnImg2)
-    wPawn.place(relx=.13+(i*.105), rely=.24, anchor="c")'''
 
 chessboard.mainloop()
