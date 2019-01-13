@@ -25,18 +25,21 @@ def is_game_over(board):
 
 def all_valid_boards(board, color):
     all_valid_boards = []
-    is_in_check = check_valid_moves.is_in_check(board)
-    if is_in_check == False or is_in_check.color == color.other():
+    if not check_valid_moves.is_in_check(board, color):
         for x in range(8):
             for y in range(8):
-                for move in check_valid_moves.valid_moves(x, y, board):
-                    all_valid_boards.append(board.copy().move(x, y, *move))
+                if board.get(x, y) is not None and board.get(x, y).color == color:
+                    for move in check_valid_moves.valid_moves(x, y, board):
+                        child = board.copy()
+                        child.move_piece(x, y, *move)
+                        all_valid_boards.append(child)
     else:
-        all_valid_boards.append(check_valid_moves.boards_while_in_check(board))
+        all_valid_boards.append(check_valid_moves.boards_while_in_check(board, color))
     return all_valid_boards
 
-board = Board.initial_board()
-print(all_valid_boards(board, Color.WHITE))
+board = eval_board_state.is_in_check()
+for board in all_valid_boards(board, Color.WHITE):
+    print(board)
 
 
 

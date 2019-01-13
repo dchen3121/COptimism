@@ -3,21 +3,7 @@ import check_valid_moves
 from eval_board_state import *
 
 
-sample_board = Board(
-    [[wR  , wN  , wB  , None, wK  , None, wN  , wR  ],
-     [wP  , wP  , wP  , wP  , None, wP  , wP  , wP  ],
-     [None, None, None, None, None, None, None, None],
-     [None, None, wB  , None, wP  , None, None, None],
-     [None, None, None, None, bP  , None, None, None ],
-     [None, None, None, bP  , None, None, None, None],
-     [bP  , bP  , bP  , None, None, wR  , bP  , bP  ],
-     [bR  , bN  , bB  , bQ  , bK  , bB  , bN  , bR  ]]
-)
 
-# print(is_in_check(sample_board, Color.BLACK))
-# print(moves_while_in_check(sample_board, Color.BLACK))
-# # print(len(moves_while_in_check(sample_board, Color.BLACK)))
-# print(check_valid_moves.valid_moves(5, 6, sample_board))
 class Game:
     whiteCastleLeft = True
     whiteCastleRight = True
@@ -64,10 +50,10 @@ b = Board([[wR, wN, wB, wQ, wK, wB, wN, wR],
            [bR, bN, bB, None, bK, bB, bN, bR]]
 )
 
-# print(is_in_check(b, Color.WHITE))
-#
-#
-# print(len(moves_while_in_check(b, Color.WHITE)))
+print(is_in_check(b, Color.WHITE))
+
+
+print(len(moves_while_in_check(b, Color.WHITE)))
 
 
 
@@ -82,12 +68,12 @@ while True:
 
     if check_valid_moves.is_in_check(game.board, Color.WHITE) != False:
         if len(check_valid_moves.moves_while_in_check(game.board, Color.WHITE)) == 0:
-            print("BLACK WON")
+            print("WHITE WON")
             break
 
     if check_valid_moves.is_in_check(game.board, Color.BLACK) != False:
         if len(check_valid_moves.moves_while_in_check(game.board, Color.BLACK)) == 0:
-            print("WHITE WON")
+            print("BLACK WON")
             break
 
     print("\n\n")
