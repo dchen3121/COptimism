@@ -40,6 +40,35 @@ class Board:
         else:
             self.board = board
 
+    @staticmethod
+    def initial_board_setup():
+        """Create a new Board with Pieces placed like they should be at the beginning of a match"""
+        wP = Piece(Type.PAWN, Color.WHITE)
+        wN = Piece(Type.KNIGHT, Color.WHITE)
+        wB = Piece(Type.BISHOP, Color.WHITE)
+        wR = Piece(Type.ROOK, Color.WHITE)
+        wQ = Piece(Type.QUEEN, Color.WHITE)
+        wK = Piece(Type.KING, Color.WHITE)
+
+        bP = Piece(Type.PAWN, Color.BLACK)
+        bN = Piece(Type.KNIGHT, Color.BLACK)
+        bB = Piece(Type.BISHOP, Color.BLACK)
+        bR = Piece(Type.ROOK, Color.BLACK)
+        bQ = Piece(Type.QUEEN, Color.BLACK)
+        bK = Piece(Type.KING, Color.BLACK)
+
+        initial_board = Board(
+            [[bR, bN, bB, bQ, bK, bB, bN, bR],
+             [bP, bP, bP, bP, bP, bP, bP, bP],
+             [None, None, None, None, None, None, None, None],
+             [None, None, None, None, None, None, None, None],
+             [None, None, None, None, None, None, None, None],
+             [None, None, None, None, None, None, None, None],
+             [wP, wP, wP, wP, wP, wP, wP, wP],
+             [wR, wN, wB, wQ, wK, wB, wN, wR]]
+        )
+        return Board(initial_board)
+
     def __str__(self):
         """Returns a pretty string representation of the 8x8 internal board."""
         board_str = " "
