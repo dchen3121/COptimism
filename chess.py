@@ -69,7 +69,7 @@ class Board:
 
         return Board(
             [[wR, wN, wB, wQ, wK, wB, wN, wR],
-             [wR, wN, wB, wQ, wK, wB, wN, wR],
+             [wP, wP, wP, wP, wP, wP, wP, wP],
              [None, None, None, None, None, None, None, None],
              [None, None, None, None, None, None, None, None],
              [None, None, None, None, None, None, None, None],
@@ -90,7 +90,7 @@ class Board:
             board_str += "-" + str(x) + "-"
         board_str += "\n"
         for row_index, row in enumerate(self.board):
-            board_str += str(7 - row_index) + "| "
+            board_str += str(row_index) + "| "
             for piece in row:
                 if piece is None:
                     board_str += "   "

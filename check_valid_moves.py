@@ -1,5 +1,6 @@
 from chess import*
 
+
 def is_in_check(board):
 
     whiteKing = board.search(Type.KING, Color.WHITE)
@@ -7,7 +8,6 @@ def is_in_check(board):
 
     blackPieceMoves = []
     whitePieceMoves = []
-
 
     for x in range(0, 8):
         for y in range(0, 8):
