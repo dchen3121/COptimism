@@ -227,6 +227,64 @@ def check_king_safety(board_input):
     return [white_eval, black_eval]
 
 
+# Gives the player a bonus for having two bishops of +0.2, or +0.3 if less pawns are present on the board
+def check_double_bishop(board_input):
+    white_eval = 0
+    black_eval = 0
+    less_than_10_pawns = len(board_input.search(wP).append(board_input.search(bP))) <= 10
+    if len(board_input.search(wB)) == 2:
+        white_eval += 0.2
+        if less_than_10_pawns:
+            white_eval += 0.1
+    if len(board_input.search(bB)) == 2:
+        black_eval += 0.2
+        if less_than_10_pawns:
+            black_eval += 0.1
+    return [white_eval, black_eval]
+
+
+# Gives players with knights a bonus of +0.1 for being in crowded situations
+def check_knight_bonus(board_input):
+    white_eval = 0
+    black_eval = 0
+    if len(board_input.search(wP).append(board_input.search(bP))) >= 14:
+        for white_knight in board_input.search(wN):
+            white_eval += 0.1
+        for black_knight in board_input.search(bN):
+            black_eval += 0.1
+    return [white_eval, black_eval]
+
+
+def check_king_threat(board_input):
+    white_eval = 0
+    black_eval = 0
+    wK_pos = board_input.search(wK)[0]
+    bK_pos = board_input.search(bK)[0]
+    wK_surrounding = [wK_pos]
+    bK_surrounding = [wK_pos]
+    for x in range(wK_pos[0] - 1, wK_pos[0] + 2):
+        for y in range(wK_pos[1] - 1, wK_pos[1] + 2):
+            if x in range(0, 8) and y in range(0, 8):
+                wK_surrounding.append((x, y))
+    for x in range(bK_pos[0] - 1, bK_pos[0] + 2):
+        for y in range(bK_pos[1] - 1, bK_pos[1] + 2):
+            if x in range(0, 8) and y in range(0, 8):
+                bK_surrounding.append((x, y))
+    for x in range(0, 8):
+        for y in range(0, 8):
+            piece = board_input.get(x, y)
+            if piece is not None:
+                if piece.color == Color.WHITE:
+                    for i in bK_surrounding:
+                        if i in valid_moves(x, y, board_input):
+                            white_eval += 0.2
+                if piece.color == Color.BLACK:
+                    for i in wK_surrounding:
+                        if i in valid_moves(x, y, board_input):
+                            black_eval += 0.2
+    return [white_eval, black_eval]
+
+
 def check_checkmated(board_input):
     '''Checks if one side on the board is checkmated'''
     if len(moves_while_in_check(board_input)) == 0:
@@ -255,13 +313,18 @@ print(check_king_safety(sample_board_2))
 def eval_board_state(board_input):
     white_result = check_material_value(board_input)[0] + check_piece_activity(board_input)[0] + \
                    check_close_to_promotion(board_input)[0] + check_king_safety(board_input)[0] + \
-                   check_checkmated(board_input)[0]
+                   check_checkmated(board_input)[0] + check_double_bishop(board_input)[0] + \
+                   check_knight_bonus(board_input)[0]
     black_result = check_material_value(board_input)[1] + check_piece_activity(board_input)[1] + \
                    check_close_to_promotion(board_input)[1] + check_king_safety(board_input)[1] + \
-                   check_checkmated(board_input)[1]
+                   check_checkmated(board_input)[1] + check_double_bishop(board_input)[1] + \
+                   check_knight_bonus(board_input)[1]
     return [white_result, black_result]
 
 '''
 print(eval_board_state(sample_board_1))
 print(eval_board_state(sample_board_2))
 '''
+print(check_king_threat(sample_board_1))
+print(check_king_threat(sample_board_2))
+print(check_king_threat(sample_board_3))
