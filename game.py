@@ -1,6 +1,7 @@
 from chess import *
 import check_valid_moves
 from eval_board_state  import*
+import minimax
 
 
 sample_board = Board(
@@ -24,6 +25,8 @@ class Game:
     BlackCastleLeft = True
     WhiteCastleRight = True
 
+    AI_color = Color.BLACK
+
     def __init__(self):
         self.board = Board.initial_board()
         self.turn_number = 0
@@ -42,15 +45,14 @@ class Game:
                 self.board.move_piece(x1, y1, x2, y2)
                 self.turn_number += 1
             else:
-                print("invalid move, try again")
-
+                print("invalid move, try again 1")
         elif (x2, y2) in check_valid_moves.valid_moves(x1, y1, self.board) and \
                 self.board.get(x1, y1).color == self.current_player_color():
             self.board.move_piece(x1, y1, x2, y2)
             self.turn_number += 1
-
         else:
-            print("invalid move, try again")
+            print(x1, y1, x2, y2)
+            print("invalid move, try again 2")
 
 
 # game = Game()

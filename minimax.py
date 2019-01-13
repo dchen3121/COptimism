@@ -3,12 +3,35 @@ from chess import *
 import check_valid_moves
 
 def get_best_move(board, depth, color):
+    """Return x1, x2 y1, y2, the coordinates of the initial position of the move and the final
+    position of the move"""
     all_boards = all_valid_boards(board, color)
-    best_board = max(all_valid_boards(board, color), key=lambda board: minimax(board, depth, color, True))
+    for board in all_boards:
+        print(board)
+        print(minimax(board, depth, color, False))
+    print("------------------------------------")
+    best_board = None
+    if color == Color.WHITE:
+        best_board = max(all_valid_boards(board, color), key=lambda board: minimax(board, depth, color, True))
+    else:
+        best_board = min(all_valid_boards(board, color), key=lambda board: minimax(board, depth, color, False))
+    x1, y1, x2, y2 = None, None, None, None
+    return extract_move(board, best_board)
+
+def extract_move(initial_board, final_board):
+    x1, y1, x2, y2 = None, None, None, None
     for x in range(8):
         for y in range(8):
-            if board.get(x, y) is not None and best_board.get(x, y) is None:
-                return (x, y)
+            if initial_board.get(x, y) is not None and final_board.get(x, y) is None:
+                x1, y1 = x, y
+            elif initial_board.get(x, y) is not None and final_board.get(x, y) is not None and \
+                    initial_board.get(x, y) != final_board.get(x, y):
+                x2, y2 = x, y
+            elif initial_board.get(x, y) is None and final_board.get(x, y) is not None:
+                x2, y2 = x, y
+    # print(initial_board)
+    # print(final_board)
+    return x1, y1, x2, y2
 
 
 def minimax(board, depth, color, is_max_player):
@@ -24,6 +47,7 @@ def minimax(board, depth, color, is_max_player):
         best_value = 100000000
         for child in all_valid_boards(board, color):
             best_value = min(best_value, minimax(board, depth - 1, color.other(), not is_max_player))
+            print("BEST VALUE---------------------------------------------------", best_value)
         return best_value
 
 
@@ -45,11 +69,11 @@ def all_valid_boards(board, color):
         all_valid_boards.append(check_valid_moves.boards_while_in_check(board, color))
     return all_valid_boards
 
-board = eval_board_state.sample_board_3
-print(board)
-for board in all_valid_boards(board, Color.WHITE):
-    for b in board:
-        print(b)
+# board = eval_board_state.sample_board_3
+# print(board)
+# for board in all_valid_boards(board, Color.WHITE):
+#     for b in board:
+#         print(b)
 
 
 
