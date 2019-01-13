@@ -1,5 +1,5 @@
 from enum import Enum
-
+from copy import deepcopy
 
 class Piece:
     def __init__(self, type, color):
@@ -49,7 +49,7 @@ class Board:
             # initially it will be 64 squares all filled with "None"
             self.board = [[None for x in range(8)] for y in range(8)]
         else:
-            self.board = board
+            self.board = deepcopy(board)
 
     @staticmethod
     def initial_board():
