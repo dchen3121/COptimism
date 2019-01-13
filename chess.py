@@ -10,9 +10,9 @@ class Piece:
     def __str__(self):
         # returns the piece in string form, e.g. (wB) for white bishop
         if self.type == Type.KNIGHT:
-            return "(" + self.color.name[0].lower() + "N" + ")"
+            return self.color.name[0].lower() + "N"
         else:
-            return "(" + self.color.name[0].lower() + self.type.name[0] + ")"
+            return self.color.name[0].lower() + self.type.name[0]
 
 
 class Type(Enum):
@@ -29,19 +29,32 @@ class Color(Enum):
 
 
 class Board:
-    def __init__(self):
+    """Create a new Board.
+    If a board argument is not given, the internal board representation is set to None in all 64 positions.
+    Otherwise, the internal board is set to the value of the argument board"""
+    def __init__(self, board=None):
         # board is a 2D list of pieces, 8 by 8
-        self.board = [[None for x in range(8)] for y in range(8)]
-        # initially it will be 64 squares all filled with "None"
+        if board is None:
+            # initially it will be 64 squares all filled with "None"
+            self.board = [[None for x in range(8)] for y in range(8)]
+        else:
+            self.board = board
 
     def __str__(self):
-        # the tostring method prints out the 8 by 8 board in an 8 by 8 fashion
-        board_str = ""
-        for row in self.board:
+        """Returns a pretty string representation of the 8x8 internal board."""
+        board_str = " "
+        for x in range(8):
+            board_str += "-" + str(x) + "-"
+        board_str += "\n"
+        for row_index, row in enumerate(self.board):
+            board_str += str(row_index)
             for piece in row:
-                board_str += str(piece) + " "
-            board_str += "\n"
-        return board_str
+                if piece is None:
+                    board_str += "   "
+                else:
+                    board_str += str(piece) + " "
+            board_str += "|\n"
+        return board_str + " " + "---" * 8 + "\n"
 
     @staticmethod
     def is_in_range(x, y):
@@ -55,7 +68,6 @@ class Board:
     def set(self, x, y, piece):
         """Set the board at index row x and column y to piece"""
         self.board[y][x] = piece
-
 
 
 
