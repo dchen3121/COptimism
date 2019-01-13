@@ -35,6 +35,16 @@ sample_board_2 = Board(
      [bP, bP, bP, None, bP, bP, bP, bP],
      [bR, bN, bB, bQ, bK, bB, bN, bR]]
 )
+sample_board_3 = Board(
+    [[wR  , None, wB  , None, wK  , wB  , wN  , wR  ],
+     [wP  , wP  , wP  , None, wP  , wP  , wP  , wP  ],
+     [None, None, None, None, None, None, None, None],
+     [None, bB  , None, wP  , None, None, None, None],
+     [None, None, None, bP  , None, None, None, None],
+     [None, None, wN  , None, None, None, None, None],
+     [bP  , bP  , bP  , None, None, bP  , bP  , bP  ],
+     [bR  , bN  , bB  , bQ  , bK  , None, bN  , bR  ]]
+)
 
 
 # check_material_value(board_input) returns a list of length 2 in form [int, int]
@@ -243,13 +253,14 @@ print(check_king_safety(sample_board_2))
 '''
 
 def eval_board_state(board_input):
+    """Returns the score for white with the score for black subtracted from it."""
     white_result = check_material_value(board_input)[0] + check_piece_activity(board_input)[0] + \
                    check_close_to_promotion(board_input)[0] + check_king_safety(board_input)[0] + \
                    check_checkmated(board_input)[0]
     black_result = check_material_value(board_input)[1] + check_piece_activity(board_input)[1] + \
                    check_close_to_promotion(board_input)[1] + check_king_safety(board_input)[1] + \
                    check_checkmated(board_input)[1]
-    return [white_result, black_result]
+    return white_result - black_result
 
 '''
 print(eval_board_state(sample_board_1))

@@ -1,6 +1,7 @@
 from enum import Enum
 from copy import deepcopy
 
+
 class Piece:
     def __init__(self, type, color):
         # piece has two attributes: type and color
@@ -24,6 +25,9 @@ class Piece:
         else:
             return False
 
+    def __hash__(self):
+        return self.type.__hash__() + self.color.__hash__()
+
 
 class Type(Enum):
     PAWN = 1
@@ -37,6 +41,12 @@ class Type(Enum):
 class Color(Enum):
     WHITE = 0
     BLACK = 1
+
+    def other(self):
+        if self == Color.WHITE:
+            return Color.BLACK
+        else:
+            return Color.WHITE
 
 
 class Board:
@@ -138,6 +148,11 @@ class Board:
 # print(board)
 # print(board.search(Piece(Type.KING, Color.WHITE)))
 
+# board = Board.initial_board()
+# print(board)
+# a = board.copy()
+# a.move_piece(0, 0, 3, 3)
+# print(board)
 
 
 

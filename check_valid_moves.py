@@ -1,59 +1,58 @@
 from chess import*
 
-def is_in_check(board, Col):
+def is_in_check(board):
 
-    king = board.search(Piece(Type.KING, Col))
-    # whiteKing = board.search(Piece(Type.KING, Color.WHITE))
-    # blackKing = board.search(Piece(Type.KING, Color.BLACK))
+    whiteKing = board.search(Type.KING, Color.WHITE)
+    blackKing = board.search(Type.KING, Color.BLACK)
 
-    # print(blackKing[0])
-
-    oppositeMoves = []
-    # whitePieceMoves = []
-    # blackPieceMoves = []
-
+    blackPieceMoves = []
+    whitePieceMoves = []
 
 
     for x in range(0, 8):
         for y in range(0, 8):
             piece = board.get(x, y)
-            if piece is not None and piece.color == Col.other() and piece.type != Type.KING:
-                oppositeMoves += valid_moves(x, y, board)
+            if piece is not None and piece.color == Color.BLACK and piece.type != Type.KING:
+                blackPieceMoves += valid_moves(piece)
 
-            # if piece is not None and piece.color == Color.WHITE and piece.type != Type.KING:
-            #     whitePieceMoves += valid_moves(x, y, board)
+            if piece is not None and piece.color == Color.WHITE and piece.type != Type.KING:
+                whitePieceMoves += valid_moves(piece)
 
-    # blackPieceMoves = list(set(blackPieceMoves))
-    # whitePieceMoves = list(set(whitePieceMoves))
+    blackPieceMoves = list(set(blackPieceMoves))
+    whitePieceMoves = list(set(whitePieceMoves))
 
-    oppositeMoves = list(set(oppositeMoves))
+    if whiteKing in blackPieceMoves:
+        return True
 
-    # if whiteKing in blackPieceMoves:
-    #     #     return True
-    #     #
-    #     # if blackKing in whitePieceMoves:
-    #     #     return True
-
-
-    if king[0] in oppositeMoves:
+    if blackKing in whitePieceMoves:
         return True
 
     return False
 
-def moves_while_in_check(board, color):
+
+def moves_while_in_check(board):
     moves = []
     for x in range(0, 8):
         for y in range(0, 8):
-            if board.get(x, y) is not None and board.get(x, y).color == color:
-                for movE in valid_moves(x, y, board):
-
-                    c = board.copy()
-                    print(c)
-                    c.move_piece(x, y, movE[0], movE[1])
-                    if not is_in_check(c, Color.WHITE):
-                        moves += [movE]
+            if board.get(x, y) is not None:
+                for move in valid_moves(x, y, board):
+                    b = board.copy
+                    if not is_in_check(b.move(x, y, move[0], move[1])):
+                        moves.append(move)
 
     return moves
+
+def boards_while_in_check(board):
+    boards = []
+    for x in range(0, 8):
+        for y in range(0, 8):
+            if board.get(x, y) is not None:
+                for move in valid_moves(x, y, board):
+                    b = board.copy
+                    if not is_in_check(b.move(x, y, move[0], move[1])):
+                        boards.append(b)
+
+    return boards
 
 
 
@@ -64,6 +63,9 @@ def valid_moves(x, y, board):
 
     if piece == None:
         return []
+
+    if is_in_check(board):
+        return moves_while_in_check(board)
 
     type = piece.type
     color = piece.color
