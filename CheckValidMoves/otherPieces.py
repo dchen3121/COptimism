@@ -60,7 +60,7 @@ def valid_move_knight(x, y, board, color):
 
 b = Board()
 b.set(2, 3, Piece(Type.ROOK, Color.BLACK))
-b.set(5, 6, Piece(Type.KNIGHT, Color.WHITE))
+b.set(4, 4, Piece(Type.KNIGHT, Color.WHITE))
 
 
 

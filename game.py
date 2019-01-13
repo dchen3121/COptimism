@@ -10,7 +10,7 @@ class Game:
 
     def __init__(self):
         self.board = Board.initial_board()
-        self.turn_number = 1
+        self.turn_number = 0
 
     def current_player_color(self):
         if self.turn_number % 2 == 0:

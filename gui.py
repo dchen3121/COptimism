@@ -1,5 +1,6 @@
 # does this work
 import tkinter
+from chess import *
 from PIL import ImageTk, Image
 from chess import *
 
