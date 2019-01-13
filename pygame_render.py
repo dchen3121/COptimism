@@ -7,8 +7,8 @@ import pygame
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
-width, height, = 500, 500
-pwidth, pheight = 50, 50
+width, height, = 1000, 1000
+pwidth, pheight = 100, 100
 BACK_COLOR = (255, 255, 255)
 SELECT_COLOR = (110, 110, 200)
 POSSIBLE_COLOR = (110, 110, 200)

@@ -35,7 +35,7 @@ def is_in_check(board, Col):
     #     #     return True
 
 
-    if king[0] in oppositeMoves:
+    if len(king) > 0 and king[0] in oppositeMoves:
         return True
 
     return False
@@ -50,17 +50,17 @@ def moves_while_in_check(board, color):
                     c = board.copy()
                     c.move_piece(x, y, movE[0], movE[1])
                     if not is_in_check(c, color):
-                        moves += [movE]
+                        moves.append(movE)
     return moves
 
 def boards_while_in_check(board, color):
     boards = []
     for x in range(0, 8):
         for y in range(0, 8):
-            if board.get(x, y) is not None:
+            if board.get(x, y) is not None and board.get(x, y).color == color:
                 for move in valid_moves(x, y, board):
                     b = board.copy()
-                    b = b.move(x, y, move[0], move[1])
+                    b.move_piece(x, y, move[0], move[1])
                     if not is_in_check(b, color):
                         boards.append(b)
 

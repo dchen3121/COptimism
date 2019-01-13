@@ -25,6 +25,7 @@ class Game:
                 self.board.get(x1, y1).color == self.current_player_color():
             self.board.move_piece(x1, y1, x2, y2)
             self.turn_number += 1
+
         else:
             print("invalid move, try again")
 
