@@ -25,14 +25,14 @@ sample_board_1 = Board(
      [bR, bN, bB, bQ, bK, bB, bN, bR],]
 )
 sample_board_2 = Board(
-    [[bR, bN, bB, bQ, bK, bB, bN, bR],
-     [bP, bP, bP, None, bP, bP, bP, bP],
-     [None, None, None, None, None, None, None, None],
-     [None, None, None, bP, None, None, None, None],
-     [None, None, None, wP, None, None, None, None],
-     [None, None, wN, None, None, None, None, None],
+    [[wR, None, wB, None, wK, wB, wN, wR],
      [wP, wP, wP, None, wP, wP, wP, wP],
-     [wR, None, wB, None, wK, wB, wN, wR]]
+     [None, None, None, None, None, None, None, None],
+     [None, None, None, wP, None, None, None, None],
+     [None, None, None, bP, None, None, None, None],
+     [None, None, wN, None, None, None, None, None],
+     [bP, bP, bP, None, bP, bP, bP, bP],
+     [bR, bN, bB, bQ, bK, bB, bN, bR]]
 )
 
 
@@ -70,7 +70,7 @@ def check_material_value(board_input):
     return [white_mat, black_mat]
 
 
-# returns an num if a piece is in reach of the centre and 0 if it isn't
+# returns a num from low to high depending on if a piece has good activity
 # return type is [whiteVal, blackVal]
 def controls_centre(piece_input, x, y):
     white_val = 0
@@ -94,10 +94,14 @@ def controls_centre(piece_input, x, y):
                     white_val += 0.4
                 if (x, y) in [(3, 3), (4, 3), (3, 4), (4, 4), (2, 3), (2, 4), (3, 2), (4, 2), (5, 3), (5, 4), (3, 5), (3, 6)]:
                     white_val += 0.3
+                if y in range(5, 7):
+                    white_val += 0.1
             if piece_input.type == Type.BISHOP:
                 if (x, y) in [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
                               (0, 7), (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), (7, 0)]:
                     white_val += 0.2
+                if x in range(2, 6) and y in range(2, 6):
+                    white_val += 0.1
             if piece_input.type == Type.ROOK:
                 if x in [3, 4]:
                     white_val += 0.1
@@ -129,10 +133,14 @@ def controls_centre(piece_input, x, y):
                     black_val += 0.4
                 if (x, y) in [(3, 3), (4, 3), (3, 4), (4, 4), (2, 3), (2, 4), (3, 2), (4, 2), (5, 3), (5, 4), (3, 5), (3, 6)]:
                     black_val += 0.3
+                if y in range(1, 3):
+                    black_val += 0.1
             if piece_input.type == Type.BISHOP:
                 if (x, y) in [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
                               (0, 7), (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), (7, 0)]:
                     black_val += 0.2
+                if x in range(2, 6) and y in range(2, 6):
+                    black_val += 0.1
             if piece_input.type == Type.ROOK:
                 if x in [3, 4]:
                     black_val += 0.1
@@ -150,7 +158,7 @@ def controls_centre(piece_input, x, y):
 # check_centre_points(board_input) returns a list of length 2 in form [num, num]
 # the first num is the total material of white's pieces
 # the second num is the total material of black's pieces
-def check_centre_points(board_input):
+def check_piece_activity(board_input):
     white_centre = 0
     black_centre = 0
     for x in range(0, 8):
@@ -161,10 +169,29 @@ def check_centre_points(board_input):
     return [white_centre, black_centre]
 
 
+# returns a num from low to high depending on pawn activity - how close it is to promotion
+# return type is [whiteVal, blackVal]
+def check_close_to_promotion(board_input):
+    white_val = 0
+    black_val = 0
+    for x in range(0, 8):
+        for y in range(5, 8):
+            if board_input.get(x, y) is not None and board_input.get(x, y).type == Type.PAWN and board_input.get(x, y).color == Color.WHITE:
+                white_val += (0.1 * y) - 0.4
+        for y in range(1, 4):
+            if board_input.get(x, y) is not None and board_input.get(x, y).type == Type.PAWN and board_input.get(x, y).color == Color.BLACK:
+                black_val += 0.4 - (0.1 * y)
+    return [white_val, black_val]
+
+
+
 
 
 print(check_material_value(sample_board_1))
-print(check_centre_points(sample_board_1))
+print(check_piece_activity(sample_board_1))
+print(check_close_to_promotion(sample_board_1))
 
 print(check_material_value(sample_board_2))
-print(check_centre_points(sample_board_2))
+print(check_piece_activity(sample_board_2))
+print(check_close_to_promotion(sample_board_2))
+
