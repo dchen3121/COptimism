@@ -1,5 +1,5 @@
 from enum import Enum
-from check_valid_moves import *
+import check_valid_moves
 
 
 class Piece:
