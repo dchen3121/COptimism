@@ -1,4 +1,3 @@
 # Crippling Optimism
 
-it is a chess engine 
-uhuitf
+A pretty good chess engine 
