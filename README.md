@@ -1,3 +1,3 @@
-# Crippling Optimism
+# COptimism
 
-it is a chess engine 
+Basic chess engine with graphic user interface built in Python. 
