@@ -1,5 +1,6 @@
 from chess import*
 
+
 def valid_moves (x, y, board):
 
     piece = board.get(x, y)
@@ -14,6 +15,12 @@ def valid_moves (x, y, board):
 
     if type == Type.KING:
         return valid_move_king(x, y, board, color)
+
+    if type == Type.ROOK:
+        return valid_moves_rook(x, y, board, color)
+
+    if type == Type.QUEEN:
+        return valid_move_queen(x, y, board, color)
 
 
 
@@ -30,35 +37,35 @@ def valid_move_bishop(x , y, board, color):
 
     counter = 1
 
-    while inBounds(x + counter , y + counter):
+    while inBounds(x + counter, y + counter):
         if board.get(x + counter , y + counter) is None or board.get(x + counter, y + counter).color != color:
             posMoves += [(x + counter, y + counter)]
         counter += 1
     counter = 1
 
     while inBounds(x + counter, y - counter):
-        if board.get(x + counter, y + counter) is None or board.get(x + counter, y + counter).color != color:
+        if board.get(x + counter, y - counter) is None or board.get(x + counter, y - counter).color != color:
             posMoves += [(x + counter, y - counter)]
         counter += 1
 
     counter = 1
 
     while inBounds(x - counter, y + counter):
-        if board.get(x + counter, y + counter) is None or board.get(x + counter, y + counter).color != color:
+        if board.get(x - counter, y + counter) is None or board.get(x - counter, y + counter).color != color:
             posMoves += [(x - counter, y + counter)]
         counter += 1
 
     counter = 1
 
     while inBounds(x - counter, y - counter):
-        if board.get(x + counter, y + counter) is None or board.get(x + counter, y + counter).color != color:
+        if board.get(x - counter, y - counter) is None or board.get(x - counter, y - counter).color != color:
             posMoves += [(x - counter, y - counter)]
         counter += 1
 
     return posMoves
 
 
-def valid_move_pawn(x , y, board, color):
+def valid_move_pawn(x, y, board, color):
     posMoves = []
 
     if inBounds(x + y + 1) and (board.get(x, y + 1) is None or board.get(x, y + 1).color != color):
@@ -99,11 +106,11 @@ def valid_move_king(x , y, board, color):
 
     return posMoves
 
-#
-# def valid_move_queen(x, y, board, color):
-#     return valid_move_bishop(x , y, board, color) +
-#
-#
+
+def valid_move_queen(x, y, board, color):
+    return valid_move_bishop(x , y, board, color) + valid_moves_rook(x, y, board, color)
+
+
 
 
 
@@ -114,19 +121,62 @@ b = Board()
 b.set(2, 3, Piece(Type.BISHOP, Color.BLACK))
 b.set(5, 6, Piece(Type.KING, Color.BLACK))
 b.set(1, 2, Piece(Type.BISHOP, Color.WHITE))
-
-
+b.set(5, 7, Piece(Type.QUEEN, Color.BLACK))
+b.set(4, 4, Piece(Type.ROOK, Color.BLACK))
 
 print(b)
 
 print(valid_move_bishop(2, 3, b, Color.BLACK))
 print(valid_moves(2, 3, b))
 print(valid_move_king(5, 6, b, Color.BLACK))
+print(valid_move_bishop(5, 7, b, Color.BLACK))
+
+
+def in_bound(x, y):
+    if 0 <= x <= 7 and 0 <= y <= 7:
+        return True
+    else:
+        return False
+
+
+
+def valid_moves_rook(x, y, board, color):
+    moves_rook = []
+
+    counter = 1
+
+    while in_bound(x + counter, y):
+        if board.get(x + counter, y) is None or board.get(x + counter, y).color != color:
+            moves_rook += [(x + counter, y)]
+        counter += 1
+
+    counter = 1
+
+    while in_bound(x - counter, y):
+        if board.get(x - counter, y) is None or board.get(x - counter, y).color != color:
+            moves_rook += [(x - counter, y)]
+        counter -= 1
+
+    counter = 1
+
+    while in_bound(x, y + counter):
+        if board.get(x, y + counter) is None or board.get(x,y + counter).color != color:
+            moves_rook += [(x, y + counter)]
+        counter += 1
+
+    counter = 1
+
+    while in_bound(x, y - counter):
+        if board.get(x, y - counter) is None or board.get(x, y - counter).color != color:
+            moves_rook += [(x, y - counter)]
+        counter += 1
+
+    return moves_rook
 
 
 
 
-
+print(valid_moves_rook(4, 4, b, Color.BLACK))
 
 
 
