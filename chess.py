@@ -68,14 +68,14 @@ class Board:
         bK = Piece(Type.KING, Color.BLACK)
 
         return Board(
-            [[bR, bN, bB, bQ, bK, bB, bN, bR],
+            [[wR, wN, wB, wQ, wK, wB, wN, wR],
+             [wR, wN, wB, wQ, wK, wB, wN, wR],
+             [None, None, None, None, None, None, None, None],
+             [None, None, None, None, None, None, None, None],
+             [None, None, None, None, None, None, None, None],
+             [None, None, None, None, None, None, None, None],
              [bP, bP, bP, bP, bP, bP, bP, bP],
-             [None, None, None, None, None, None, None, None],
-             [None, None, None, None, None, None, None, None],
-             [None, None, None, None, None, None, None, None],
-             [None, None, None, None, None, None, None, None],
-             [wP, wP, wP, wP, wP, wP, wP, wP],
-             [wR, wN, wB, wQ, wK, wB, wN, wR]]
+             [bR, bN, bB, bQ, bK, bB, bN, bR]]
         )
 
     def copy(self):

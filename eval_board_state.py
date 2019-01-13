@@ -121,7 +121,7 @@ def controls_centre(piece_input, x, y):
                 black_val += 0.3
             else:
                 black_val += 0
-        elif piece_input.type == bN:
+        elif piece_input == bN:
             if (x, y) in [(1, 2), (1, 3), (2, 1), (3, 1), (4, 1), (5, 1), (6, 2), (6, 3),
                           (1, 5), (1, 4), (2, 6), (3, 6), (4, 6), (5, 6), (6, 5), (6, 4)]:
                 black_val += 0.2
@@ -132,18 +132,18 @@ def controls_centre(piece_input, x, y):
                 black_val += 0.3
             if y in range(1, 3):
                 black_val += 0.1
-        elif piece_input.type == bB:
+        elif piece_input == bB:
             if (x, y) in [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
                           (0, 7), (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), (7, 0)]:
                 black_val += 0.2
             if x in range(2, 6) and y in range(2, 6):
                 black_val += 0.1
-        elif piece_input.type == bR:
+        elif piece_input == bR:
             if x in [3, 4]:
                 black_val += 0.1
             if y in [3, 4]:
                 black_val += 0.1
-        elif piece_input.type == bQ:
+        elif piece_input == bQ:
             if (x, y) in [(0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7),
                           (0, 7), (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), (7, 0)]:
                 black_val += 0.1
@@ -187,33 +187,35 @@ def check_king_safety(board_input):
     black_eval = 0
     wK_pos = board_input.search(Piece(Type.KING, Color.WHITE))[0]
     bK_pos = board_input.search(Piece(Type.KING, Color.BLACK))[0]
-    for white_material, black_material in check_material_value(board_input):
-        if white_material >= 18 and black_material >= 18:
-            if wK_pos[0] in [3, 4]:
+    white_material = check_material_value(board_input)[0]
+    black_material = check_material_value(board_input)[1]
+    if white_material >= 18 and black_material >= 18:
+        if wK_pos[0] in [3, 4]:
+            white_eval -= 0.1
+        if bK_pos[0] in [3, 4]:
+            black_eval -= 0.1
+        if wK_pos[1] == 2:
+            white_eval -= 0.5
+        if bK_pos[1] == 2:
+            black_eval -= 0.5
+        if wK_pos[1] > 2:
+            white_eval -= 1.5
+        if bK_pos[1] > 2:
+            black_eval -= 1.5
+    elif white_material < 18 and black_material < 18:
+        if wK_pos[0] in [0, 7] or wK_pos[1] in [0, 7]:
+            white_eval -= 0.2
+        if bK_pos[0] in [0, 7] or bK_pos[1] in [0, 7]:
+            black_eval -= 0.2
+    else:
+        if white_material > black_material:
+            if wK_pos[1] >= 2:
                 white_eval -= 0.1
-            if bK_pos[0] in [3, 4]:
+        elif black_material > white_material:
+            if bK_pos[1] <= 5:
                 black_eval -= 0.1
-            if wK_pos[1] == 2:
-                white_eval -= 0.5
-            if bK_pos[1] == 2:
-                black_eval -= 0.5
-            if wK_pos[1] > 2:
-                white_eval -= 1.5
-            if bK_pos[1] > 2:
-                black_eval -= 1.5
-        elif white_material < 18 and black_material < 18:
-            if wK_pos[0] in [0, 7] or wK_pos[1] in [0, 7]:
-                white_eval -= 0.2
-            if bK_pos[0] in [0, 7] or bK_pos[1] in [0, 7]:
-                black_eval -= 0.2
-        else:
-            if white_material > black_material:
-                if wK_pos[1] >= 2:
-                    white_eval -= 0.1
-            elif black_material > white_material:
-                if bK_pos[1] <= 5:
-                    black_eval -= 0.1
     return [white_eval, black_eval]
+
 
 '''
 print(check_material_value(sample_board_1))
