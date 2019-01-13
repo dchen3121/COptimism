@@ -219,7 +219,8 @@ def check_king_safety(board_input):
 
 def check_checkmated(board_input):
     '''Checks if one side on the board is checkmated'''
-    if len(moves_while_in_check(board_input)):
+    if len(moves_while_in_check(board_input)) == 0:
+        if
 
 
 
