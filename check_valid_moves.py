@@ -115,7 +115,7 @@ def valid_move_king(x , y, board, color):
 
 
 def valid_move_queen(x, y, board, color):
-    return valid_move_bishop(x , y, board, color) + valid_moves_rook(x, y, board, color)
+    return valid_move_bishop(x , y, board, color) + valid_move_rook(x, y, board, color)
 
 
 
@@ -123,7 +123,7 @@ def valid_move_queen(x, y, board, color):
 
 
 
-
+#
 # b = Board()
 # b.set(2, 3, Piece(Type.BISHOP, Color.BLACK))
 # b.set(5, 6, Piece(Type.KING, Color.BLACK))
