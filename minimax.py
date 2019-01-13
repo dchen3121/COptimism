@@ -8,6 +8,15 @@ def minimax(board, depth, color, is_max_player):
         return eval_board_state.eval_board_state(board)
     if is_max_player:
         best_value = -100000000
+        for child in all_valid_boards(board, color):
+            best_value = max(best_value, minimax(board, depth - 1, color.other(), not is_max_player))
+        return best_value
+    else:
+        best_value = 100000000
+        for child in all_valid_boards(board, color):
+            best_value = min(best_value, minimax(board, depth - 1, color.other(), not is_max_player))
+        return best_value
+
 
 
 
@@ -15,16 +24,19 @@ def is_game_over(board):
     return len(check_valid_moves.moves_while_in_check(board)) == 0
 
 def all_valid_boards(board, color):
-    all_valid_moves = set()
     all_valid_boards = []
     is_in_check = check_valid_moves.is_in_check(board)
-    for x in range(8):
-        for y in range(8):
-            if is_in_check == False or is_in_check.color == color.other():
+    if is_in_check == False or is_in_check.color == color.other():
+        for x in range(8):
+            for y in range(8):
                 for move in check_valid_moves.valid_moves(x, y, board):
                     all_valid_boards.append(board.copy().move(x, y, *move))
     else:
         all_valid_boards.append(check_valid_moves.boards_while_in_check(board))
+    return all_valid_boards
+
+board = Board.initial_board()
+print(all_valid_boards(board, Color.WHITE))
 
 
 
