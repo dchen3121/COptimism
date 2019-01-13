@@ -41,7 +41,7 @@ class Board:
             self.board = board
 
     @staticmethod
-    def initial_board_setup():
+    def initial_board():
         """Create a new Board with Pieces placed like they should be at the beginning of a match"""
         wP = Piece(Type.PAWN, Color.WHITE)
         wN = Piece(Type.KNIGHT, Color.WHITE)
@@ -57,7 +57,7 @@ class Board:
         bQ = Piece(Type.QUEEN, Color.BLACK)
         bK = Piece(Type.KING, Color.BLACK)
 
-        initial_board = Board(
+        return Board(
             [[bR, bN, bB, bQ, bK, bB, bN, bR],
              [bP, bP, bP, bP, bP, bP, bP, bP],
              [None, None, None, None, None, None, None, None],
@@ -67,7 +67,6 @@ class Board:
              [wP, wP, wP, wP, wP, wP, wP, wP],
              [wR, wN, wB, wQ, wK, wB, wN, wR]]
         )
-        return Board(initial_board)
 
     def __str__(self):
         """Returns a pretty string representation of the 8x8 internal board."""
