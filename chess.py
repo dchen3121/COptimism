@@ -37,6 +37,12 @@ class Color(Enum):
     WHITE = 0
     BLACK = 1
 
+    def other(self):
+        if self == Color.WHITE:
+            return Color.BLACK
+        else:
+            return Color.WHITE
+
 
 class Board:
     """Create a new Board.
