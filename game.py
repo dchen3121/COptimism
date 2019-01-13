@@ -1,6 +1,6 @@
 from chess import *
-import evalBoardState
+import eval_board_state
 
 board = Board.initial_board()
 
-print(board.get(3, 6))
+print(board)
