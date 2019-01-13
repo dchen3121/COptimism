@@ -38,7 +38,11 @@ def moves_while_in_check(board):
                     b = board.copy
                     if not is_in_check(b.move(x, y, move[0], move[1])):
                         moves += [move]
-    return moves
+    if len(moves) == 0:
+        return False
+
+    else:
+        return moves
 
 
 
@@ -88,19 +92,32 @@ def valid_move_bishop(x , y, board, color):
     while inBounds(x + counter, y + counter):
         if board.get(x + counter , y + counter) is None or board.get(x + counter, y + counter).color != color:
             posMoves += [(x + counter, y + counter)]
+
+        else:
+            break
+
         counter += 1
     counter = 1
 
     while inBounds(x + counter, y - counter):
         if board.get(x + counter, y - counter) is None or board.get(x + counter, y - counter).color != color:
             posMoves += [(x + counter, y - counter)]
+
+        else:
+            break
+
         counter += 1
+
+
 
     counter = 1
 
     while inBounds(x - counter, y + counter):
         if board.get(x - counter, y + counter) is None or board.get(x - counter, y + counter).color != color:
             posMoves += [(x - counter, y + counter)]
+
+        else:
+            break
         counter += 1
 
     counter = 1
@@ -108,6 +125,10 @@ def valid_move_bishop(x , y, board, color):
     while inBounds(x - counter, y - counter):
         if board.get(x - counter, y - counter) is None or board.get(x - counter, y - counter).color != color:
             posMoves += [(x - counter, y - counter)]
+
+        else:
+            break
+
         counter += 1
 
     return posMoves
@@ -117,17 +138,17 @@ def valid_move_pawn(x, y, board, color):
     posMoves = []
 
     if color == Color.WHITE:
-        if inBounds(x, y + 1) and (board.get(x, y + 1) is None or board.get(x, y + 1).color != color):
+        if inBounds(x, y + 1) and board.get(x, y + 1) is None:
             posMoves += [(x, y + 1)]
 
-        if inBounds(x, y + 2) and (board.get(x, y + 2) is None or board.get(x, y + 2).color != color):
+        if y == 1 and board.get(x, y + 2) is None:
             posMoves += [(x, y + 2)]
 
     else:
-        if inBounds(x, y - 1) and (board.get(x, y - 1) is None or board.get(x, y - 1).color != color):
+        if inBounds(x, y - 1) and board.get(x, y - 1) is None:
             posMoves += [(x, y - 1)]
 
-        if inBounds(x, y - 2) and (board.get(x, y - 2) is None or board.get(x, y - 2).color != color):
+        if y == 7 and board.get(x, y - 2) is None:
             posMoves += [(x, y - 2)]
 
     return posMoves
@@ -203,6 +224,8 @@ def valid_move_rook(x, y, board, color):
     while in_bound(x + counter, y):
         if board.get(x + counter, y) is None or board.get(x + counter, y).color != color:
             moves_rook += [(x + counter, y)]
+        else:
+            break
         counter += 1
 
     counter = 1
@@ -210,6 +233,8 @@ def valid_move_rook(x, y, board, color):
     while in_bound(x - counter, y):
         if board.get(x - counter, y) is None or board.get(x - counter, y).color != color:
             moves_rook += [(x - counter, y)]
+        else:
+            break
         counter -= 1
 
     counter = 1
@@ -217,6 +242,8 @@ def valid_move_rook(x, y, board, color):
     while in_bound(x, y + counter):
         if board.get(x, y + counter) is None or board.get(x,y + counter).color != color:
             moves_rook += [(x, y + counter)]
+        else:
+            break
         counter += 1
 
     counter = 1
@@ -224,6 +251,8 @@ def valid_move_rook(x, y, board, color):
     while in_bound(x, y - counter):
         if board.get(x, y - counter) is None or board.get(x, y - counter).color != color:
             moves_rook += [(x, y - counter)]
+        else:
+            break
         counter += 1
 
     return moves_rook
