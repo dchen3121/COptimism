@@ -27,14 +27,14 @@ class Game:
             print("invalid move, try again")
 
 
-game = Game()
-while True:
-    current_player_color = game.current_player_color()
-    print("current player: " + current_player_color.name)
-    print(game.board)
-    x1, y1 = map(int, input("enter your move start : x1, y1").split())
-    x2, y2 = map(int, input("enter your move end   : x2, y2").split())
-    game.make_move(x1, y1, x2, y2)
-    print("\n\n")
+# game = Game()
+# while True:
+#     current_player_color = game.current_player_color()
+#     print("current player: " + current_player_color.name)
+#     print(game.board)
+#     x1, y1 = map(int, input("enter your move start : x1, y1").split())
+#     x2, y2 = map(int, input("enter your move end   : x2, y2").split())
+#     game.make_move(x1, y1, x2, y2)
+#     print("\n\n")
 
 
