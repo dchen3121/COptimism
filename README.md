@@ -1,3 +1,3 @@
 # COptimism
 
-Basic chess engine with graphic user interface built in Python. 
+A basic chess engine with graphic user interface built in Python. 
