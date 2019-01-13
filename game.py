@@ -3,6 +3,17 @@ import check_valid_moves
 from eval_board_state  import*
 
 
+sample_board = Board(
+    [[wR  , wN  , wB  , None, wK  , None, wN  , wR  ],
+     [wP  , wP  , wP  , wP  , None, wP  , wP  , wP  ],
+     [None, None, None, None, None, None, None, None],
+     [None, None, wB  , None, wP  , None, None, None],
+     [None, None, None, None, bP  , None, None, wQ  ],
+     [None, None, None, bP  , None, None, None, None],
+     [bP  , bP  , bP  , None, None, bP  , bP  , bP  ],
+     [bR  , bN  , bB  , bQ  , bK  , bB  , bN  , bR  ]]
+)
+
 
 class Game:
     whiteCastleLeft = True
