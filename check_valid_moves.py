@@ -29,6 +29,7 @@ def is_in_check(board):
 
     return False
 
+
 def moves_while_in_check(board):
     moves = []
     for x in range(0, 8):
