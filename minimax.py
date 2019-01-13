@@ -2,6 +2,7 @@ import eval_board_state
 from chess import *
 import check_valid_moves
 
+
 def get_best_move(board, depth, color):
     """Return x1, x2 y1, y2, the coordinates of the initial position of the move and the final
     position of the move"""
@@ -69,12 +70,12 @@ def all_valid_boards(board, color):
     else:
         all_valid_boards.append(check_valid_moves.boards_while_in_check(board, color))
     return all_valid_boards
-
+'''
 board = eval_board_state.sample_board_4
 print(board)
 for b in all_valid_boards(board, Color.WHITE):
     print(b)
     print(minimax(b, 0, Color.BLACK, False))
-
+'''
 
 
