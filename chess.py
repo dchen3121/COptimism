@@ -58,9 +58,4 @@ class Board:
 
 
 
-b = Board()
-print(b)
-print(Piece(Type.PAWN, Color.WHITE))
-
-
 
