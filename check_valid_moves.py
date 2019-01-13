@@ -139,12 +139,11 @@ def valid_move_pawn(x, y, board, color):
         if y == 1 and board.get(x, y + 2) is None:
             posMoves += [(x, y + 2)]
 
-        if inBounds(x - 1, y + 1) and board.get(x - 1, y + 1) is not None:
+        if inBounds(x - 1, y + 1) and board.get(x - 1, y + 1) is not None and board.get(x - 1, y + 1).color != color:
             posMoves += [(x - 1, y + 1)]
 
-        if inBounds(x + 1, y + 1) and board.get(x + 1, y + 1) is not None:
+        if inBounds(x + 1, y + 1) and board.get(x + 1, y + 1) is not None and board.get(x + 1, y + 1).color != color:
             posMoves += [(x + 1, y + 1)]
-
 
     else:
         if inBounds(x, y - 1) and board.get(x, y - 1) is None:
@@ -153,10 +152,10 @@ def valid_move_pawn(x, y, board, color):
         if y == 6 and board.get(x, y - 2) is None:
             posMoves += [(x, y - 2)]
 
-        if inBounds(x - 1, y - 1) and board.get(x - 1, y - 1) is not None:
+        if inBounds(x - 1, y - 1) and board.get(x - 1, y - 1) is not None and board.get(x - 1, y - 1).color != color:
             posMoves += [(x - 1, y - 1)]
 
-        if inBounds(x + 1, y - 1) and board.get(x + 1, y - 1) is not None:
+        if inBounds(x + 1, y - 1) and board.get(x + 1, y - 1) is not None and board.get(x + 1, y - 1).color != color:
             posMoves += [(x + 1, y - 1)]
 
     return posMoves
