@@ -47,6 +47,10 @@ def moves_while_in_check(board):
 def valid_moves(x, y, board):
 
     piece = board.get(x, y)
+
+    if piece == None:
+        return []
+
     type = piece.type
     color = piece.color
 

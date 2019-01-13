@@ -3,6 +3,11 @@ import check_valid_moves
 
 
 class Game:
+    whiteCastleLeft = True
+    whiteCastleRight = True
+    BlackCastleLeft = True
+    WhiteCastleRight = True
+
     def __init__(self):
         self.board = Board.initial_board()
         self.turn_number = 1
