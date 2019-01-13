@@ -5,11 +5,12 @@ from game import Game
 from chess import *
 import pygame
 import check_valid_moves
+import minimax
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
-width, height, = 500, 500
-pwidth, pheight = 50, 50
+width, height, = 800, 800
+pwidth, pheight = 100, 100
 BACK_COLOR = (255, 255, 255)
 SELECT_COLOR = (110, 110, 200)
 POSSIBLE_COLOR = (110, 110, 200)
@@ -66,6 +67,8 @@ def handle_mouse_click():
     if x1 is not None and y1 is not None:
         print("from:", (x1, y1), "to:", (x, y))
         game.make_move(x1, y1, x, y)  # the move was not valid
+        render()
+        game.make_move(*minimax.get_best_move(game.board, 1, game.AI_color))
         x1, y1 = None, None
         render()
 
