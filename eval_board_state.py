@@ -46,6 +46,17 @@ sample_board_3 = Board(
      [bR  , bN  , bB  , bQ  , bK  , None, bN  , bR  ]]
 )
 
+sample_board_4 = Board(
+[[bR, bN, bB, bQ, bK, bB, bN, bR],
+[bP,None, bP, bP, bP, bP, bP, bP],
+[None,None,None,None,None,None,None,None],
+[None, bP,None,None,None,None,None,None],
+[None,None,None,None,None,None,None,None],
+[None, wP,None,None,None,None,None,None],
+[wP,None, wP, wP, wP, wP, wP, wP],
+[wR, wN, wB, wQ, wK, wB, wN, wR]]
+)
+
 
 # check_material_value(board_input) returns a list of length 2 in form [int, int]
 # the first int is the total material of white's pieces

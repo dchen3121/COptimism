@@ -37,17 +37,18 @@ def extract_move(initial_board, final_board):
 def minimax(board, depth, color, is_max_player):
     """Minimax algorithm. Uses white as the reference color"""
     if depth == 0 or is_game_over(board, color):
+        # print(str(board) + "---------------------------------board   ")
         return eval_board_state.eval_board_state(board)
     if is_max_player:
         best_value = -100000000
         for child in all_valid_boards(board, color):
-            best_value = max(best_value, minimax(board, depth - 1, color.other(), not is_max_player))
+            best_value = max(best_value, minimax(child, depth - 1, color.other(), not is_max_player))
         return best_value
     else:
         best_value = 100000000
         for child in all_valid_boards(board, color):
-            best_value = min(best_value, minimax(board, depth - 1, color.other(), not is_max_player))
-            print("BEST VALUE---------------------------------------------------", best_value)
+            # print(str(child) + "----------------------------child")
+            best_value = min(best_value, minimax(child, depth - 1, color.other(), not is_max_player))
         return best_value
 
 
@@ -69,12 +70,11 @@ def all_valid_boards(board, color):
         all_valid_boards.append(check_valid_moves.boards_while_in_check(board, color))
     return all_valid_boards
 
-# board = eval_board_state.sample_board_3
-# print(board)
-# for board in all_valid_boards(board, Color.WHITE):
-#     for b in board:
-#         print(b)
-
+board = eval_board_state.sample_board_4
+print(board)
+for b in all_valid_boards(board, Color.WHITE):
+    print(b)
+    print(minimax(b, 0, Color.BLACK, False))
 
 
 

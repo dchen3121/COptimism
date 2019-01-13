@@ -8,7 +8,7 @@ import minimax
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
-width, height, = 1000, 1000
+width, height, = 800, 800
 pwidth, pheight = 100, 100
 BACK_COLOR = (255, 255, 255)
 SELECT_COLOR = (110, 110, 200)
@@ -68,7 +68,7 @@ def handle_mouse_click():
         game.make_move(x1, y1, x, y)
         render()
         if game.current_player_color() == game.AI_color:
-            game.make_move(*minimax.get_best_move(game.board, 0, game.current_player_color()))
+            game.make_move(*minimax.get_best_move(game.board, 1, game.current_player_color()))
         x1, y1 = None, None
         render()
 
@@ -81,7 +81,6 @@ def render():
             piece = game.board.get(x, y)
             if x1 is not None and y1 is not None and x == x1 and y == y1:
                 pygame.draw.rect(screen, SELECT_COLOR, (x * pwidth, (7 - y) * pheight, pwidth, pheight))
-
             if piece is not None:
                 screen.blit(piece_to_image[piece], (x*pwidth, (7 - y)*pheight))
     pygame.display.update()
