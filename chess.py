@@ -1,4 +1,5 @@
 from enum import Enum
+from copy import deepcopy
 
 
 class Piece:
@@ -23,6 +24,9 @@ class Piece:
             return self.type == other.type and self.color == other.color
         else:
             return False
+
+    def __hash__(self):
+        return self.type.__hash__() + self.color.__hash__()
 
 
 class Type(Enum):
@@ -55,7 +59,7 @@ class Board:
             # initially it will be 64 squares all filled with "None"
             self.board = [[None for x in range(8)] for y in range(8)]
         else:
-            self.board = board
+            self.board = deepcopy(board)
 
     @staticmethod
     def initial_board():
@@ -144,6 +148,11 @@ class Board:
 # print(board)
 # print(board.search(Piece(Type.KING, Color.WHITE)))
 
+# board = Board.initial_board()
+# print(board)
+# a = board.copy()
+# a.move_piece(0, 0, 3, 3)
+# print(board)
 
 
 
