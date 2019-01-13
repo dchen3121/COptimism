@@ -47,23 +47,11 @@ def moves_while_in_check(board, color):
         for y in range(0, 8):
             if board.get(x, y) is not None and board.get(x, y).color == color:
                 for movE in valid_moves(x, y, board):
-
                     c = board.copy()
                     print(c)
                     c.move_piece(x, y, movE[0], movE[1])
                     if not is_in_check(c, Color.WHITE):
                         moves += [movE]
-
-
-def moves_while_in_check(board):
-    moves = []
-    for x in range(0, 8):
-        for y in range(0, 8):
-            if board.get(x, y) is not None:
-                for move in valid_moves(x, y, board):
-                    b = board.copy
-                    if not is_in_check(b.move(x, y, move[0], move[1])):
-                        moves.append(move)
     return moves
 
 def boards_while_in_check(board):
@@ -88,7 +76,7 @@ def valid_moves(x, y, board):
     if piece == None:
         return []
 
-    if is_in_check(board):
+    if is_in_check(board, board.get(x, y).color):
         return moves_while_in_check(board)
 
     type = piece.type
