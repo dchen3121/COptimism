@@ -318,7 +318,7 @@ def eval_board_state(board_input):
                    check_close_to_promotion(board_input)[1] + check_king_safety(board_input)[1] + \
                    check_checkmated(board_input)[1] + check_double_bishop(board_input)[1] + \
                    check_knight_bonus(board_input)[1]
-    return [white_result, black_result]
+    return white_result - black_result
 
 '''
 print(eval_board_state(sample_board_1))
