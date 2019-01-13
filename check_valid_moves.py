@@ -1,8 +1,48 @@
 from chess import*
 
+def is_in_check(board):
+
+    whiteKing = (2, 3)
+    blackKing = (3, 4)
+
+    blackPieceMoves = []
+    whitePieceMoves = []
+
+
+    for x in range(0, 8):
+        for y in range(0, 8):
+            piece = board.get(x, y)
+            if piece is not None and piece.color == Color.BLACK and piece.type != Type.KING:
+                blackPieceMoves += valid_moves(piece)
+
+            if piece is not None and piece.color == Color.WHITE and piece.type != Type.KING:
+                whitePieceMoves += valid_moves(piece)
+
+    blackPieceMoves = list(set(blackPieceMoves))
+    whitePieceMoves = list(set(whitePieceMoves))
+
+    if whiteKing in blackPieceMoves:
+        return True
+
+    if blackKing in whitePieceMoves:
+        return True
+
+    return False
+
+def moves_while_in_check(board):
+    moves = []
+    for x in range(0, 8):
+        for y in range(0, 8):
+            if board.get(x, y) is not None:
+                for move in valid_moves(x, y, board):
+                    b = board.copy
+                    if not is_in_check(b.move(x, y, move[0], move[1])):
+                        moves += [move]
+
+
 
 ####################################################################
-def valid_moves (x, y, board):
+def valid_moves(x, y, board):
 
     piece = board.get(x, y)
     type = piece.type
@@ -75,7 +115,7 @@ def valid_move_bishop(x , y, board, color):
 def valid_move_pawn(x, y, board, color):
     posMoves = []
 
-    if inBounds(x + y + 1) and (board.get(x, y + 1) is None or board.get(x, y + 1).color != color):
+    if inBounds(x, y + 1) and (board.get(x, y + 1) is None or board.get(x, y + 1).color != color):
         posMoves += [(x, y + 1)]
 
     if inBounds(x, y + 2) and (board.get(x, y + 2) is None or board.get(x, y + 2).color != color):
