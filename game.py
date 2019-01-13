@@ -35,7 +35,16 @@ class Game:
             return Color.BLACK
 
     def make_move(self, x1, y1, x2, y2):
-        if (x2, y2) in check_valid_moves.valid_moves(x1, y1, self.board) and \
+        if is_in_check(self.board, self.current_player_color()) ==  True:
+            if (x2, y2) in check_valid_moves.valid_moves(x1, y1, self.board) and \
+                    (x2, y2) in moves_while_in_check(self.board, self.current_player_color()) and \
+                    self.board.get(x1, y1).color == self.current_player_color():
+                self.board.move_piece(x1, y1, x2, y2)
+                self.turn_number += 1
+            else:
+                print("invalid move, try again")
+
+        elif (x2, y2) in check_valid_moves.valid_moves(x1, y1, self.board) and \
                 self.board.get(x1, y1).color == self.current_player_color():
             self.board.move_piece(x1, y1, x2, y2)
             self.turn_number += 1

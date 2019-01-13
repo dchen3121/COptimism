@@ -7,9 +7,11 @@ import pygame
 
 os.environ['SDL_VIDEO_CENTERED'] = '1'
 pygame.init()
-width, height, = 1000, 1000
-pwidth, pheight = 100, 100
-back_color = (255, 255, 255)
+width, height, = 500, 500
+pwidth, pheight = 50, 50
+BACK_COLOR = (255, 255, 255)
+SELECT_COLOR = (110, 110, 200)
+POSSIBLE_COLOR = (110, 110, 200)
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode((width, height), pygame.RESIZABLE)
 
@@ -41,6 +43,7 @@ for piece in piece_to_image.keys():
 
 # setup game
 game = Game()
+x1, y1 = None, None
 
 def events():
     for event in pygame.event.get():
@@ -55,20 +58,28 @@ def events():
 def handle_mouse_click():
     mposx, mposy = pygame.mouse.get_pos()
     x, y = mposx // pwidth, 7 - mposy // pheight
-    print(x, y)
+    global x1, y1
+    if game.board.get(x, y) is not None and game.current_player_color() == game.board.get(x, y).color:
+        x1, y1 = x, y
+        return
+    if x1 is not None and y1 is not None:
+        print("from:", (x1, y1), "to:", (x, y))
+        game.make_move(x1, y1, x, y)  # the move was not valid
+        x1, y1 = None, None
+        render()
 
 
 def render():
-    screen.fill(back_color)
+    screen.fill(BACK_COLOR)
     screen.blit(chessboard, (0, 0))
     for x in range(8):
         for y in range(8):
             piece = game.board.get(x, y)
+            if x1 is not None and y1 is not None and x == x1 and y == y1:
+                pygame.draw.rect(screen, SELECT_COLOR, (x * pwidth, (7 - y) * pheight, pwidth, pheight))
+
             if piece is not None:
-                screen.blit(piece_to_image[piece], (x*100, y*100))
-            # pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(x*100, y*100, 90, 90))
-    # imagerect = pygame.Rect(0, 0, 300, 300)
-    # screen.blit(myimage, imagerect)
+                screen.blit(piece_to_image[piece], (x*pwidth, (7 - y)*pheight))
     pygame.display.update()
 
 
