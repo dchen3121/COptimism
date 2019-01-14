@@ -288,19 +288,19 @@ def check_king_threat(board_input):
                 if piece.color == Color.WHITE:
                     for i in bK_surrounding:
                         if i in valid_moves(x, y, board_input):
-                            white_eval += 0.2
+                            white_eval += 0.1
                 if piece.color == Color.BLACK:
                     for i in wK_surrounding:
                         if i in valid_moves(x, y, board_input):
-                            black_eval += 0.2
+                            black_eval += 0.1
     return [white_eval, black_eval]
 
 
 def check_checkmated(board_input):
     '''Checks if one side on the board is checkmated'''
-    if len(moves_while_in_check(board_input, Color.WHITE)) == 0 and is_in_check(board_input) == Color.WHITE:
+    if is_in_check(board_input, Color.WHITE) and len(moves_while_in_check(board_input, Color.WHITE)) == 0:
         return [-1000000000, 0]
-    if len(moves_while_in_check(board_input, Color.BLACK)) == 0 and is_in_check(board_input) == Color.BLACK:
+    if is_in_check(board_input, Color.BLACK) and len(moves_while_in_check(board_input, Color.BLACK)):
         return [0, -1000000000]
     return [0, 0]
 
