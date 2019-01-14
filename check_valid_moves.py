@@ -167,7 +167,7 @@ def valid_move_pawn(x, y, board, color):
         if in_bound(x, y + 1) and board.get(x, y + 1) is None:
             posMoves.append((x, y + 1))
 
-        if y == 1 and board.get(x, y + 2) is None:
+        if y == 1 and board.get(x, y + 2) is None and board.get(x, y + 1) is None:
             posMoves.append((x, y + 2))
 
         if in_bound(x - 1, y + 1) and board.get(x - 1, y + 1) is not None and board.get(x - 1, y + 1).color != color:
@@ -180,7 +180,7 @@ def valid_move_pawn(x, y, board, color):
         if in_bound(x, y - 1) and board.get(x, y - 1) is None:
             posMoves.append((x, y - 1))
 
-        if y == 6 and board.get(x, y - 2) is None:
+        if y == 6 and board.get(x, y - 2) is None and board.get(x, y - 1) is None:
             posMoves.append((x, y - 2))
 
         if in_bound(x - 1, y - 1) and board.get(x - 1, y - 1) is not None and board.get(x - 1, y - 1).color != color:
