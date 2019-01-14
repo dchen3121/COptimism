@@ -73,7 +73,7 @@ class Game:
 #     x2, y2 = map(int, input("enter your move end   : x2, y2").split())
 #     game.make_move(x1, y1, x2, y2)
 #     print("\n\n")
-game = Game()
+# game = Game()
 
 b = Board([[wR, wN, wB, wQ, wK, wB, wN, wR],
            [wP, wP, wP, wP, wP, None, None, wP],
