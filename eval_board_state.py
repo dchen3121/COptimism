@@ -297,10 +297,11 @@ def check_king_threat(board_input):
 
 
 def check_checkmated(board_input):
-    '''Checks if one side on the board is checkmated'''
+    """Checks if one side on the board is checkmated
+    TODO: don't compute len of list of possible moves while in check. Instead, break when the first move is found"""
     if is_in_check(board_input, Color.WHITE) and len(moves_while_in_check(board_input, Color.WHITE)) == 0:
         return [-1000000000, 0]
-    if is_in_check(board_input, Color.BLACK) and len(moves_while_in_check(board_input, Color.BLACK)):
+    if is_in_check(board_input, Color.BLACK) and len(moves_while_in_check(board_input, Color.BLACK)) == 0:
         return [0, -1000000000]
     return [0, 0]
 

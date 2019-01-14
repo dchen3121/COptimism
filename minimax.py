@@ -6,10 +6,10 @@ def get_best_move(board, depth, color):
     """Return x1, x2 y1, y2, the coordinates of the initial position of the move and the final
     position of the move"""
     all_boards = all_valid_boards(board, color)
-    for board in all_boards:
-        print(board)
-        print(minimax(board, depth, color, False))
-    print("------------------------------------")
+    # for board in all_boards:
+    #     print(board)
+    #     print(minimax(board, depth, color, False))
+    # print("------------------------------------")
     best_board = None
     if color == Color.WHITE:
         best_board = max(all_valid_boards(board, color), key=lambda board: minimax(board, depth, color, True))
@@ -47,7 +47,7 @@ def minimax(board, depth, color, is_max_player):
     else:
         best_value = 100000000
         for child in all_valid_boards(board, color):
-            # print(str(child) + "----------------------------child")
+            print(str(child) + "----------------------------child")
             best_value = min(best_value, minimax(child, depth - 1, color.other(), not is_max_player))
         return best_value
 
