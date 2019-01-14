@@ -39,10 +39,7 @@ def is_in_check(board, color):
     #     # if blackKing in whitePieceMoves:
     #     #     return True
 
-    if len(king) > 0 and king[0] in oppositeMoves:
-        return True
-
-    return False
+    return len(king) > 0 and king[0] in oppositeMoves
 
 
 def moves_while_in_check(board, color):
@@ -107,20 +104,12 @@ def valid_moves(x, y, board):
 #################################################################################
 
 
-def inBounds(x, y):
-    if 0 <= x <= 7 and 0 <= y <= 7:
-        return True
-
-    else:
-        return False
-
-
 def valid_move_bishop(x, y, board, color):
     posMoves = []
 
     counter = 1
 
-    while inBounds(x + counter, y + counter):
+    while in_bound(x + counter, y + counter):
         if board.get(x + counter, y + counter) is None:
             posMoves.append((x + counter, y + counter))
         elif board.get(x + counter, y + counter).color != color:
@@ -132,7 +121,7 @@ def valid_move_bishop(x, y, board, color):
         counter += 1
     counter = 1
 
-    while inBounds(x + counter, y - counter):
+    while in_bound(x + counter, y - counter):
         if board.get(x + counter, y - counter) is None:
             posMoves.append((x + counter, y - counter))
         elif board.get(x + counter, y - counter).color != color:
@@ -145,7 +134,7 @@ def valid_move_bishop(x, y, board, color):
 
     counter = 1
 
-    while inBounds(x - counter, y + counter):
+    while in_bound(x - counter, y + counter):
         if board.get(x - counter, y + counter) is None:
             posMoves.append((x - counter, y + counter))
         elif board.get(x - counter, y + counter).color != color:
@@ -157,7 +146,7 @@ def valid_move_bishop(x, y, board, color):
 
     counter = 1
 
-    while inBounds(x - counter, y - counter):
+    while in_bound(x - counter, y - counter):
         if board.get(x - counter, y - counter) is None:
             posMoves.append((x - counter, y - counter))
         elif board.get(x - counter, y - counter).color != color:
@@ -175,29 +164,29 @@ def valid_move_pawn(x, y, board, color):
     posMoves = []
 
     if color == Color.WHITE:
-        if inBounds(x, y + 1) and board.get(x, y + 1) is None:
+        if in_bound(x, y + 1) and board.get(x, y + 1) is None:
             posMoves.append((x, y + 1))
 
         if y == 1 and board.get(x, y + 2) is None:
             posMoves.append((x, y + 2))
 
-        if inBounds(x - 1, y + 1) and board.get(x - 1, y + 1) is not None and board.get(x - 1, y + 1).color != color:
+        if in_bound(x - 1, y + 1) and board.get(x - 1, y + 1) is not None and board.get(x - 1, y + 1).color != color:
             posMoves.append((x - 1, y + 1))
 
-        if inBounds(x + 1, y + 1) and board.get(x + 1, y + 1) is not None and board.get(x + 1, y + 1).color != color:
+        if in_bound(x + 1, y + 1) and board.get(x + 1, y + 1) is not None and board.get(x + 1, y + 1).color != color:
             posMoves.append((x + 1, y + 1))
 
     else:
-        if inBounds(x, y - 1) and board.get(x, y - 1) is None:
+        if in_bound(x, y - 1) and board.get(x, y - 1) is None:
             posMoves.append((x, y - 1))
 
         if y == 6 and board.get(x, y - 2) is None:
             posMoves.append((x, y - 2))
 
-        if inBounds(x - 1, y - 1) and board.get(x - 1, y - 1) is not None and board.get(x - 1, y - 1).color != color:
+        if in_bound(x - 1, y - 1) and board.get(x - 1, y - 1) is not None and board.get(x - 1, y - 1).color != color:
             posMoves.append((x - 1, y - 1))
 
-        if inBounds(x + 1, y - 1) and board.get(x + 1, y - 1) is not None and board.get(x + 1, y - 1).color != color:
+        if in_bound(x + 1, y - 1) and board.get(x + 1, y - 1) is not None and board.get(x + 1, y - 1).color != color:
             posMoves.append((x + 1, y - 1))
 
     return posMoves
@@ -206,28 +195,28 @@ def valid_move_pawn(x, y, board, color):
 def valid_move_king(x, y, board, color):
     posMoves = []
 
-    if inBounds(x, y + 1) and (board.get(x, y + 1) is None or board.get(x, y + 1).color != color):
+    if in_bound(x, y + 1) and (board.get(x, y + 1) is None or board.get(x, y + 1).color != color):
         posMoves.append((x, y + 1))
 
-    if inBounds(x + 1, y + 1) and (board.get(x + 1, y + 1) is None or board.get(x + 1, y + 1).color != color):
+    if in_bound(x + 1, y + 1) and (board.get(x + 1, y + 1) is None or board.get(x + 1, y + 1).color != color):
         posMoves.append((x + 1, y + 1))
 
-    if inBounds(x + 1, y) and (board.get(x + 1, y) is None or board.get(x + 1, y).color != color):
+    if in_bound(x + 1, y) and (board.get(x + 1, y) is None or board.get(x + 1, y).color != color):
         posMoves.append((x + 1, y))
 
-    if inBounds(x + 1, y - 1) and (board.get(x + 1, y - 1) is None or board.get(x + 1, y - 1).color != color):
+    if in_bound(x + 1, y - 1) and (board.get(x + 1, y - 1) is None or board.get(x + 1, y - 1).color != color):
         posMoves.append((x + 1, y - 1))
 
-    if inBounds(x, y - 1) and (board.get(x, y - 1) is None or board.get(x, y - 1).color != color):
+    if in_bound(x, y - 1) and (board.get(x, y - 1) is None or board.get(x, y - 1).color != color):
         posMoves.append((x, y - 1))
 
-    if inBounds(x - 1, y - 1) and (board.get(x - 1, y - 1) is None or board.get(x - 1, y - 1).color != color):
+    if in_bound(x - 1, y - 1) and (board.get(x - 1, y - 1) is None or board.get(x - 1, y - 1).color != color):
         posMoves.append((x - 1, y - 1))
 
-    if inBounds(x - 1, y) and (board.get(x - 1, y) is None or board.get(x - 1, y).color != color):
+    if in_bound(x - 1, y) and (board.get(x - 1, y) is None or board.get(x - 1, y).color != color):
         posMoves.append((x - 1, y))
 
-    if inBounds(x - 1, y + 1) and (board.get(x - 1, y + 1) is None or board.get(x - 1, y + 1).color != color):
+    if in_bound(x - 1, y + 1) and (board.get(x - 1, y + 1) is None or board.get(x - 1, y + 1).color != color):
         posMoves.append((x - 1, y + 1))
 
     return posMoves
@@ -254,10 +243,7 @@ def valid_move_queen(x, y, board, color):
 
 
 def in_bound(x, y):
-    if 0 <= x <= 7 and 0 <= y <= 7:
-        return True
-    else:
-        return False
+    return 0 <= x <= 7 and 0 <= y <= 7
 
 
 def valid_move_rook(x, y, board, color):

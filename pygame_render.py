@@ -66,7 +66,7 @@ def handle_mouse_click():
         return
     if x1 is not None and y1 is not None:
         print("from:", (x1, y1), "to:", (x, y))
-        game.make_move(x1, y1, x, y)  # the move was not valid
+        game.make_move(x1, y1, x, y)
         render()
         game.make_move(*minimax.get_best_move(game.board, 1, game.AI_color))
         x1, y1 = None, None
