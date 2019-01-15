@@ -19,21 +19,21 @@ screen = pygame.display.set_mode((width, height), pygame.RESIZABLE)
 
 # load images for the pieces
 piece_to_image = {}
-piece_to_image[Piece(Type.PAWN, Color.BLACK)] = pygame.image.load("bPawn.png")
-piece_to_image[Piece(Type.BISHOP, Color.BLACK)] = pygame.image.load("bBishop.png")
-piece_to_image[Piece(Type.KNIGHT, Color.BLACK)] = pygame.image.load("bKnight.png")
-piece_to_image[Piece(Type.ROOK, Color.BLACK)] = pygame.image.load("bRook.png")
-piece_to_image[Piece(Type.QUEEN, Color.BLACK)] = pygame.image.load("bQueen.png")
-piece_to_image[Piece(Type.KING, Color.BLACK)] = pygame.image.load("bKing.png")
+piece_to_image[Piece(Type.PAWN, Color.BLACK)] = pygame.image.load("images/bPawn.png")
+piece_to_image[Piece(Type.BISHOP, Color.BLACK)] = pygame.image.load("images/bBishop.png")
+piece_to_image[Piece(Type.KNIGHT, Color.BLACK)] = pygame.image.load("images/bKnight.png")
+piece_to_image[Piece(Type.ROOK, Color.BLACK)] = pygame.image.load("images/bRook.png")
+piece_to_image[Piece(Type.QUEEN, Color.BLACK)] = pygame.image.load("images/bQueen.png")
+piece_to_image[Piece(Type.KING, Color.BLACK)] = pygame.image.load("images/bKing.png")
 
-piece_to_image[Piece(Type.PAWN, Color.WHITE)] = pygame.image.load("wPawn.png")
-piece_to_image[Piece(Type.BISHOP, Color.WHITE)] = pygame.image.load("wBishop.png")
-piece_to_image[Piece(Type.KNIGHT, Color.WHITE)] = pygame.image.load("wKnight.png")
-piece_to_image[Piece(Type.ROOK, Color.WHITE)] = pygame.image.load("wRook.png")
-piece_to_image[Piece(Type.QUEEN, Color.WHITE)] = pygame.image.load("wQueen.png")
-piece_to_image[Piece(Type.KING, Color.WHITE)] = pygame.image.load("wKing.png")
+piece_to_image[Piece(Type.PAWN, Color.WHITE)] = pygame.image.load("images/wPawn.png")
+piece_to_image[Piece(Type.BISHOP, Color.WHITE)] = pygame.image.load("images/wBishop.png")
+piece_to_image[Piece(Type.KNIGHT, Color.WHITE)] = pygame.image.load("images/wKnight.png")
+piece_to_image[Piece(Type.ROOK, Color.WHITE)] = pygame.image.load("images/wRook.png")
+piece_to_image[Piece(Type.QUEEN, Color.WHITE)] = pygame.image.load("images/wQueen.png")
+piece_to_image[Piece(Type.KING, Color.WHITE)] = pygame.image.load("images/wKing.png")
 
-chessboard = pygame.image.load("chessboard480.jpg")
+chessboard = pygame.image.load("images/chessboard480.jpg")
 chessboard = pygame.transform.scale(chessboard, (pwidth * 8, pheight * 8))
 
 for piece in piece_to_image.keys():

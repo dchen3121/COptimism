@@ -14,52 +14,52 @@ img2 = ImageTk.PhotoImage(img)
 panel = tkinter.Label(chessboard, image=img2)
 panel.pack(side="bottom", fill="both", expand="yes")
 # White Pieces
-wkingImg = Image.open("wKing.png")
+wkingImg = Image.open("images/wKing.png")
 wkingImg = wkingImg.resize((48, 48), Image.ANTIALIAS)
 wkingImg2 = ImageTk.PhotoImage(wkingImg)
 
-wqueenImg = Image.open("wQueen.png")
+wqueenImg = Image.open("images/wQueen.png")
 wqueenImg = wqueenImg.resize((48, 48), Image.ANTIALIAS)
 wqueenImg2 = ImageTk.PhotoImage(wqueenImg)
 
-wbishopImg = Image.open("wBishop.png")
+wbishopImg = Image.open("images/wBishop.png")
 wbishopImg = wbishopImg.resize((48, 48), Image.ANTIALIAS)
 wbishopImg2 = ImageTk.PhotoImage(wbishopImg)
 
-wrookImg = Image.open("wRook.png")
+wrookImg = Image.open("images/wRook.png")
 wrookImg = wrookImg.resize((48, 48), Image.ANTIALIAS)
 wrookImg2 = ImageTk.PhotoImage(wrookImg)
 
-wknightImg = Image.open("wKnight.png")
+wknightImg = Image.open("images/wKnight.png")
 wknightImg = wknightImg.resize((48, 48), Image.ANTIALIAS)
 wknightImg2 = ImageTk.PhotoImage(wknightImg)
 
-wpawnImg = Image.open("wPawn.png")
+wpawnImg = Image.open("images/wPawn.png")
 wpawnImg = wpawnImg.resize((48, 48), Image.ANTIALIAS)
 wpawnImg2 = ImageTk.PhotoImage(wpawnImg)
 
 # Black Pieces
-bkingImg = Image.open("bKing.png")
+bkingImg = Image.open("images/bKing.png")
 bkingImg = bkingImg.resize((48, 48), Image.ANTIALIAS)
 bkingImg2 = ImageTk.PhotoImage(bkingImg)
 
-bqueenImg = Image.open("bQueen.png")
+bqueenImg = Image.open("images/bQueen.png")
 bqueenImg = bqueenImg.resize((48, 48), Image.ANTIALIAS)
 bqueenImg2 = ImageTk.PhotoImage(bqueenImg)
 
-bbishopImg = Image.open("bBishop.png")
+bbishopImg = Image.open("images/bBishop.png")
 bbishopImg = bbishopImg.resize((48, 48), Image.ANTIALIAS)
 bbishopImg2 = ImageTk.PhotoImage(bbishopImg)
 
-brookImg = Image.open("bRook.png")
+brookImg = Image.open("images/bRook.png")
 brookImg = brookImg.resize((48, 48), Image.ANTIALIAS)
 brookImg2 = ImageTk.PhotoImage(brookImg)
 
-bknightImg = Image.open("bKnight.png")
+bknightImg = Image.open("images/bKnight.png")
 bknightImg = bknightImg.resize((48, 48), Image.ANTIALIAS)
 bknightImg2 = ImageTk.PhotoImage(bknightImg)
 
-bpawnImg = Image.open("bPawn.png")
+bpawnImg = Image.open("images/bPawn.png")
 bpawnImg = bpawnImg.resize((48, 48), Image.ANTIALIAS)
 bpawnImg2 = ImageTk.PhotoImage(bpawnImg)
 
