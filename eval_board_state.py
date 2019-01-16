@@ -299,9 +299,26 @@ def check_king_threat(board_input):
 def check_checkmated(board_input):
     """Checks if one side on the board is checkmated
     TODO: don't compute len of list of possible moves while in check. Instead, break when the first move is found"""
-    if is_in_check(board_input, Color.WHITE) and len(moves_while_in_check(board_input, Color.WHITE)) == 0:
+
+    if is_in_check(board_input, Color.WHITE):
+        for x in range(0, 8):
+            for y in range(0, 8):
+                if board_input.get(x, y) is not None and board_input.get(x, y).color == Color.WHITE:
+                    for move in valid_moves(x, y, board_input):
+                        c = board_input.copy()
+                        c.move_piece(x, y, move[0], move[1])
+                        if not is_in_check(c, Color.WHITE):
+                            return [0, 0]
         return [-1000000000, 0]
-    if is_in_check(board_input, Color.BLACK) and len(moves_while_in_check(board_input, Color.BLACK)) == 0:
+    if is_in_check(board_input, Color.BLACK):
+        for x in range(0, 8):
+            for y in range(0, 8):
+                if board_input.get(x, y) is not None and board_input.get(x, y).color == Color.BLACK:
+                    for move in valid_moves(x, y, board_input):
+                        c = board_input.copy()
+                        c.move_piece(x, y, move[0], move[1])
+                        if not is_in_check(c, Color.BLACK):
+                            return [0, 0]
         return [0, -1000000000]
     return [0, 0]
 

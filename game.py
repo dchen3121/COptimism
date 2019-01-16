@@ -42,9 +42,13 @@ class Game:
             b = self.board.copy()
             b.move_piece(x1, y1, x2, y2)
             if (x2, y2) in check_valid_moves.valid_moves(x1, y1, self.board) and \
-                    (x2, y2) in moves_while_in_check(self.board, self.current_player_color()) and \
                     self.board.get(x1, y1).color == self.current_player_color() and \
-                    is_in_check(b, self.current_player_color()) == False:
+                    is_in_check(b, self.current_player_color()) == False: #and \
+                    # (x2, y2) in moves_while_in_check(self.board, self.current_player_color()):
+
+                    # Why is it checking for moves_while_in_check when it is checked to be not in check
+                    # from line above? -DChen
+
                 self.board.move_piece(x1, y1, x2, y2)
                 self.turn_number += 1
             else:
