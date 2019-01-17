@@ -73,7 +73,7 @@ def handle_mouse_click():
         print("from:", (x1, y1), "to:", (x, y))
         game.make_move(x1, y1, x, y)
         render()
-        game.make_move(*minimax.get_best_move(game.board, 0, game.AI_color))
+        game.make_move(*minimax.get_best_move(game.board, 1, game.AI_color))
         x1, y1 = None, None
         render()
 

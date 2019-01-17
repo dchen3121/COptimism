@@ -40,6 +40,8 @@ def extract_move(initial_board, final_board):
 def minimax(board, depth, color, is_max_player):
     """Minimax algorithm. Uses white as the reference color"""
     if depth == 0 or is_game_over(board, color):
+        print(board)
+        print(eval_board_state.eval_board_state(board))
         return eval_board_state.eval_board_state(board)
     if is_max_player:
         best_value = -100000000
