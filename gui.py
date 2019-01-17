@@ -6,7 +6,7 @@ from chess import *
 
 chessboard = tkinter.Tk()
 # Chessboard
-img = Image.open('chessboard.png')
+img = Image.open('images/chessboard.png')
 img = img.resize((600, 600), Image.ANTIALIAS)
 
 img2 = ImageTk.PhotoImage(img)
