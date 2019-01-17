@@ -184,6 +184,7 @@ def check_piece_activity(board_input):
             points_list = controls_centre(board_input.get(x, y), x, y)
             white_centre += points_list[0]
             black_centre += points_list[1]
+    #return [0,0]
     return [white_centre, black_centre]
 
 
@@ -203,7 +204,7 @@ def check_close_to_promotion(board_input):
 
 
 def check_king_safety(board_input):
-    '''checks and evaluates king safety given a board, returns a list of two nums'''
+    # checks and evaluates king safety given a board, returns a list of two nums
     white_eval = 0
     black_eval = 0
     wK_pos = board_input.search(Piece(Type.KING, Color.WHITE))[0]
@@ -293,10 +294,12 @@ def check_king_threat(board_input):
                     for i in wK_surrounding:
                         if i in valid_moves(x, y, board_input):
                             black_eval += 0.1
+    # return [0,0]
     return [white_eval, black_eval]
 
 
 def check_checkmated(board_input):
+    #return[0,0]
     """Checks if one side on the board is checkmated
     TODO: don't compute len of list of possible moves while in check. Instead, break when the first move is found"""
 
@@ -339,14 +342,15 @@ print(check_king_safety(sample_board_2))
 '''
 
 def eval_board_state(board_input):
+    #return[0,0]
     white_result = check_material_value(board_input)[0] + check_piece_activity(board_input)[0] + \
-                   check_close_to_promotion(board_input)[0] + check_king_safety(board_input)[0] + \
+                   check_close_to_promotion(board_input)[0] + \
                    check_checkmated(board_input)[0] + check_double_bishop(board_input)[0] + \
-                   check_knight_bonus(board_input)[0]
+                   check_knight_bonus(board_input)[0]# + check_king_safety(board_input)[0] + \
     black_result = check_material_value(board_input)[1] + check_piece_activity(board_input)[1] + \
-                   check_close_to_promotion(board_input)[1] + check_king_safety(board_input)[1] + \
+                   check_close_to_promotion(board_input)[1] + \
                    check_checkmated(board_input)[1] + check_double_bishop(board_input)[1] + \
-                   check_knight_bonus(board_input)[1]
+                   check_knight_bonus(board_input)[1] # + check_king_safety(board_input)[1] + \
     return white_result - black_result
 
 '''
