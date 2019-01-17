@@ -75,6 +75,8 @@ def check_material_value(board_input):
                     white_mat += 5
                 elif piece == wQ:
                     white_mat += 9
+                elif piece == wK:
+                    white_mat -= 100
                 elif piece == bP:
                     black_mat += 1
                 elif piece == bN or piece == bB:
@@ -83,6 +85,8 @@ def check_material_value(board_input):
                     black_mat += 5
                 elif piece == bQ:
                     black_mat += 9
+                elif piece == bK:
+                    black_mat -= 100
     return [white_mat, black_mat]
 
 
@@ -204,6 +208,7 @@ def check_close_to_promotion(board_input):
 
 
 def check_king_safety(board_input):
+    return [0,0]
     # checks and evaluates king safety given a board, returns a list of two nums
     white_eval = 0
     black_eval = 0
@@ -341,16 +346,17 @@ print(check_close_to_promotion(sample_board_2))
 print(check_king_safety(sample_board_2))
 '''
 
+
 def eval_board_state(board_input):
     #return[0,0]
     white_result = check_material_value(board_input)[0] + check_piece_activity(board_input)[0] + \
                    check_close_to_promotion(board_input)[0] + \
                    check_checkmated(board_input)[0] + check_double_bishop(board_input)[0] + \
-                   check_knight_bonus(board_input)[0]# + check_king_safety(board_input)[0] + \
+                   check_knight_bonus(board_input)[0] + check_king_safety(board_input)[0]
     black_result = check_material_value(board_input)[1] + check_piece_activity(board_input)[1] + \
                    check_close_to_promotion(board_input)[1] + \
                    check_checkmated(board_input)[1] + check_double_bishop(board_input)[1] + \
-                   check_knight_bonus(board_input)[1] # + check_king_safety(board_input)[1] + \
+                   check_knight_bonus(board_input)[1] + check_king_safety(board_input)[1]
     return white_result - black_result
 
 '''

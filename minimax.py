@@ -43,13 +43,13 @@ def minimax(board, depth, color, is_max_player):
         return eval_board_state.eval_board_state(board)
     if is_max_player:
         best_value = -100000000
-        for child in all_valid_boards(board, color):
-            best_value = max(best_value, minimax(child, depth - 1, color.other(), not is_max_player))
+        for board in all_valid_boards(board, color):
+            best_value = max(best_value, minimax(board, depth - 1, color.other(), not is_max_player))
         return best_value
     else:
         best_value = 100000000
-        for child in all_valid_boards(board, color):
-            best_value = min(best_value, minimax(child, depth - 1, color.other(), not is_max_player))
+        for board in all_valid_boards(board, color):
+            best_value = min(best_value, minimax(board, depth - 1, color.other(), not is_max_player))
         return best_value
 
 
@@ -70,7 +70,7 @@ def all_valid_boards(board, color):
                         if not check_valid_moves.is_in_check(child, color):
                             all_valid_boards.append(child)
     else:
-        all_valid_boards.append(check_valid_moves.boards_while_in_check(board, color))
+        all_valid_boards = check_valid_moves.boards_while_in_check(board, color)
     return all_valid_boards
 '''
 board = eval_board_state.sample_board_4
