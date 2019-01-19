@@ -5,13 +5,13 @@ A basic chess engine with graphic user interface built in Python.
 Run pygame_render.py to run COptimism; the depth that the AI will be running at can be adjusted inside the same file.
 
 ## Tools Used
-Python 3.6, PyGame
+Python 3.6, PyGame  
 The chess board is represented by a Board object while the pieces are represented by individual Piece objects.
 The user interface is built with PyGame.
 
 ## Algorithms
-The engine runs based on the **minimax algorithm**.
-Inside the project there are two files named minimax.py and eval_board_state.py.
+The engine runs based on the **minimax algorithm**.  
+Inside the project there are two files named minimax.py and eval_board_state.py.  
 #### eval_board_state.py
 - A function that returns a single number when given a Board object; the number returned is the AI's evaluation of the board inputted. The return value will be more positive if it favours white, while it will be more negative if it favours black.
 - Sends the returned value to minimax.py where the board uses the evaluation to base its next move.
@@ -30,5 +30,5 @@ Inside the project there are two files named minimax.py and eval_board_state.py.
 - The AI runs the minimax algorithm: First, it takes in the current position and generates a list of possible boards that may result from its current move, then evaluates them all using eval_board_state(). If depth has not reached zero, for each of the positions generated, it will continue to attempt to evaluate the boards that may result from that board until depth 0 is reached. Returns a single best move based on its evaluations.
 
 # Project
-Made at: Starterhacks 2019 @ University of Waterloo
-Team members: Abhishek Patel, Brianna Ai, Daniel Chen, Jessica Cao, Oliver Zhang 
+Made at: Starterhacks 2019 @ University of Waterloo  
+Team members: Abhishek Patel, Brianna Ai, Daniel Chen, Jessica Cao, Oliver Zhang   
