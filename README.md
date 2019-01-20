@@ -1,6 +1,9 @@
 # COptimism
 A basic chess engine with graphic user interface built in Python. 
 
+## Screenshots
+![An image of the chess AI in action](images/chess.PNG)
+
 ## Run
 Run pygame_render.py to run COptimism; the depth that the AI will be running at can be adjusted inside the same file.
 
